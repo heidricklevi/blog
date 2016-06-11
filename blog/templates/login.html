@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form class="form-horizontal" action="/login/verify" method="post">
+    {% if loginform.errors %}
+        <ul class="errors">
+            {% for field_name, field_errors in loginform.errors|dictsort if field_errors %}
+              {% for error in field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {{ loginform.csrf_token }}
+    <div class="form-group">
+        {{ loginform.email(class='form-control', placeholder='Email Address') }}
+    </div>
+    <div class="form-group">
+        {{ loginform.password(class='form-control', placeholder='Password') }}
+    </div>
+    {{ loginform.submit(value='Sign In', class='btn btn-primary btn-block') }}
+</form>
+
+{% endblock %}
