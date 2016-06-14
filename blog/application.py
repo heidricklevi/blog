@@ -1,22 +1,21 @@
 import datetime
-from flask import Flask, render_template, request
+from flask import Flask, session, render_template, request, flash, redirect, url_for
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
+from flask.ext.moment import Moment
 from dbhelper import DBHelper
+import config
 from user import User
-from bcrypt import hashpw
 import bcrypt
-from passwordhelper import PasswordHelper
 from forms import RegistrationForm, LoginForm
 
 application = Flask(__name__)
-application.secret_key = "11231423513231231312536dkfjsajDhbasdgasdf"
+application.secret_key = config.app_key_auth
 login_manager = LoginManager(application)
 DB = DBHelper()
-PH = PasswordHelper()
-
+moment = Moment(application)
 
 @application.route('/')
-def hello_world():
+def home():
     return render_template("index.html")
 
 @application.route('/register', methods=['GET'])
@@ -39,7 +38,17 @@ def create_user():
 
 @application.route('/admin')
 @login_required
-@admin_required
+def admin_panel():
+    records = DB.get_all_users()
+    return render_template("admin.html", records=records)
+
+@application.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out")
+    return redirect(url_for("home"))
+
 
 @application.route('/login')
 def login_page():

@@ -2,12 +2,12 @@ import pymysql
 import datetime
 import dbconfig
 import bcrypt
-from passwordhelper import PasswordHelper
+
 
 class DBHelper():
 
-    def connect(self, database='blog'):
-        return pymysql.connect(host='localhost', user=dbconfig.db_user,
+    def connect(self, database=dbconfig.db_name):
+        return pymysql.connect(host=dbconfig.dev_host, user=dbconfig.db_user,
                                passwd=dbconfig.db_password, db=database)
 
     def get_all_users(self):
@@ -64,33 +64,16 @@ class DBHelper():
         finally:
             connection.close()
 
-    def get_all_crimes(self):
+    def add_column(self, col):
         connection = self.connect()
         try:
-            query = "SELECT latitude, longitude, date, category, description FROM crimes;"
+            query = "ALTER TABLE blog.users ADD %(col)s "
             with connection.cursor() as cursor:
                 cursor.execute(query)
-            named_crimes = []
-            for crime in cursor:
-                named_crime = {
-                    "latitude": crime[0],
-                    "longitude": crime[1],
-                    "date": datetime.datetime.strftime(crime[2], '%Y-%m-%d'),
-                    "category": crime[3],
-                    "description": crime[4]
-                }
-                named_crimes.append(named_crime)
-            return named_crimes
+                connection.commit()
         finally:
             connection.close()
-# DB = DBHelper()
-# PH = PasswordHelper()
-# hash = bcrypt.hashpw(b'akasis12', bcrypt.gensalt())
-# DB.create_user("Test", "j@heidritech.com", datetime.datetime.now(), 0, hash, datetime.datetime.now())
-# user = DB.get_user_login("j@heidritech.com")
-# stored_pass = str(user[0][1]).encode()
-# entered = b'akasis123'
-# if bcrypt.hashpw(entered, stored_pass) == stored_pass:
-#     print("True")
-# else:
-#     print("False")
+
+DB = DBHelper()
+confirmed = DB.add_column("confirmed")
+print(confirmed)

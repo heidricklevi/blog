@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "authenticated_base.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="table" xmlns:width="http://www.w3.org/1999/xhtml">
+
+    <table class="table" style="width:100%">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Timestamp</th>
+        <th>Admin</th>
+        <th>Password</th>
+        <th>Modified</th>
+
+    {% for record in records %}
+        <tr>
+            <td>{{ record.0 }}</td>
+            <td>{{ record.1 }}</td>
+            <td>{{ record.2 }}</td>
+            <td>{{ record.3 }}</td>
+            <td>{{ record.4 }}</td>
+            <td>{{ record.5 }}</td>
+            <td>{{ record.6 }}</td>
+        </tr>
+
+    {% endfor %}
+    </table>
+  </div>
+
+{% endblock %}

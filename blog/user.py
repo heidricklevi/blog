@@ -1,4 +1,11 @@
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask import current_app
+import dbhelper
+
+
+
 class User:
+
     def __init__(self, email):
         self.email = email
 
@@ -13,3 +20,4 @@ class User:
 
     def is_authenticated(self):
         return True
+
