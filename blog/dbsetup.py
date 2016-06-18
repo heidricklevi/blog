@@ -10,14 +10,26 @@ try:
         sql = """CREATE TABLE IF NOT EXISTS blog.users (
 
               id int NOT NULL AUTO_INCREMENT,
+              roles_id int,
               name VARCHAR(1000),
               email VARCHAR(255),
               registration_date DATETIME,
-              is_admin BOOLEAN,
               password VARCHAR(255),
               modified_at TIMESTAMP,
-               PRIMARY KEY (id))"""
+              confirmed BOOLEAN,
+              FOREIGN KEY (roles_id) REFERENCES blog.roles(roles_id),
+              PRIMARY KEY (id))"""
 
+        cursor.execute(sql)
+
+        sql = """CREATE TABLE IF NOT EXISTS blog.roles (
+
+              roles_id int NOT NULL AUTO_INCREMENT,
+              name VARCHAR(64) UNIQUE,
+              default_permission BOOLEAN,
+              permissions int,
+              PRIMARY KEY (roles_id)
+              )"""
         cursor.execute(sql)
     connection.commit()
 finally:

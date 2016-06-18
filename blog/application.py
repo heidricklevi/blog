@@ -2,11 +2,14 @@ import datetime
 from flask import Flask, session, render_template, request, flash, redirect, url_for
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
 from flask.ext.moment import Moment
+
+import user
 from dbhelper import DBHelper
 import config
 from user import User
 import bcrypt
 from forms import RegistrationForm, LoginForm
+import email
 
 application = Flask(__name__)
 application.secret_key = config.app_key_auth
@@ -32,8 +35,10 @@ def create_user():
 
     hashed = bcrypt.hashpw(str(form.password.data).encode(), bcrypt.gensalt())
 
-    DB.create_user(form.name.data, form.email.data, datetime.datetime.now(), False, hashed,
-                       datetime.datetime.now())
+    DB.create_user(1, form.name.data, form.email.data, datetime.datetime.now(), hashed,
+                       datetime.datetime.now(), True)
+
+
     return render_template("register.html", registrationform=form)
 
 @application.route('/admin')
@@ -61,7 +66,7 @@ def login():
         stored_user = DB.get_user_login(form.email.data)
         hashed = str(stored_user[0][1]).encode()
         if stored_user and bcrypt.hashpw(str(form.password.data).encode(), hashed) == hashed:
-            user = User(form.email.data)
+            user = User(form.email.data, hashed, stored_user[0][2])
             login_user(user, remember=True)
             return render_template("login.html", loginform=form)
 
@@ -70,9 +75,10 @@ def login():
 
 @login_manager.user_loader
 def load_user(user_id):
-    user_password = DB.get_user(user_id)
+    stored_user = DB.get_user_login(user_id)
+    user_password = str(stored_user[0][1].encode())
     if user_password:
-        return User(user_id)
+        return User(stored_user[0][0], user_password, stored_user[0][2])
 
 if __name__ == '__main__':
     application.debug = True

@@ -5,12 +5,13 @@
 
     <table class="table" style="width:100%">
         <th>ID</th>
+        <th>roles_id</th>
         <th>Name</th>
         <th>Email Address</th>
         <th>Timestamp</th>
-        <th>Admin</th>
         <th>Password</th>
         <th>Modified</th>
+        <th>Confirmed</th>
 
     {% for record in records %}
         <tr>
@@ -21,6 +22,7 @@
             <td>{{ record.4 }}</td>
             <td>{{ record.5 }}</td>
             <td>{{ record.6 }}</td>
+            <td>{{ record.7 }}</td>
         </tr>
 
     {% endfor %}
