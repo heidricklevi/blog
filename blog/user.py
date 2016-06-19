@@ -5,15 +5,29 @@ import config
 import os, shutil
 
 
-
-#model for MySQL db is tuple -- ((name, email, registration_date, is_admin, password, modified_at, confirmed),) --> access by index
-
 class User(dbhelper.DBHelper):
 
-    def __init__(self, email, password, confirmed):
+    def __init__(self, email, password, confirmed, role):
         self.email = email
         self.password = password
+        self.role = role
         self.confirmed = confirmed
+
+    def generate_confirmation_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm': self.email})
+
+    def confirm(self, token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get('confirm') != self.email:
+            return False
+        self.confirmed = True
+        dbhelper.DBHelper().update_confirmed_state(self.confirmed)
+        return True
 
     def get_id(self):
         return self.email

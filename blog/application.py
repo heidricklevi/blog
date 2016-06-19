@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, session, render_template, request, flash, redirect, url_for
+from flask import Flask, session, render_template, request, flash, redirect, url_for, abort
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
 from flask.ext.moment import Moment
 
@@ -16,6 +16,11 @@ application.secret_key = config.app_key_auth
 login_manager = LoginManager(application)
 DB = DBHelper()
 moment = Moment(application)
+
+ROLE_USER = 1
+ROLE_MODERATOR = 2
+ROLE_ADMINISTRATOR = 3
+
 
 @application.route('/')
 def home():
@@ -35,8 +40,8 @@ def create_user():
 
     hashed = bcrypt.hashpw(str(form.password.data).encode(), bcrypt.gensalt())
 
-    DB.create_user(1, form.name.data, form.email.data, datetime.datetime.now(), hashed,
-                       datetime.datetime.now(), True)
+    DB.create_user(ROLE_USER, form.name.data, form.email.data, datetime.datetime.now(), hashed,
+                       datetime.datetime.now(), False)
 
 
     return render_template("register.html", registrationform=form)
@@ -45,6 +50,9 @@ def create_user():
 @login_required
 def admin_panel():
     records = DB.get_all_users()
+    user = current_user._get_current_object()
+    if user.role != ROLE_ADMINISTRATOR:
+        abort(403)
     return render_template("admin.html", records=records)
 
 @application.route("/logout")
@@ -64,9 +72,9 @@ def login():
     form = LoginForm(request.form)
     if form.validate():
         stored_user = DB.get_user_login(form.email.data)
-        hashed = str(stored_user[0][1]).encode()
+        hashed = str(stored_user[0]['password']).encode()
         if stored_user and bcrypt.hashpw(str(form.password.data).encode(), hashed) == hashed:
-            user = User(form.email.data, hashed, stored_user[0][2])
+            user = User(form.email.data, hashed, stored_user[0]['confirmed'], stored_user[0]['roles_id'])
             login_user(user, remember=True)
             return render_template("login.html", loginform=form)
 
@@ -76,9 +84,11 @@ def login():
 @login_manager.user_loader
 def load_user(user_id):
     stored_user = DB.get_user_login(user_id)
-    user_password = str(stored_user[0][1].encode())
+    user_password = str(stored_user[0]['password'].encode())
     if user_password:
-        return User(stored_user[0][0], user_password, stored_user[0][2])
+
+        return User(stored_user[0]['email'], user_password, stored_user[0]['confirmed'], stored_user[0]['roles_id'])
+
 
 if __name__ == '__main__':
     application.debug = True

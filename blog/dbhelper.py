@@ -1,14 +1,20 @@
 import pymysql
-import datetime
 import dbconfig
-import bcrypt
 
+
+class Permission:
+    FOLLOW = 0x01
+    COMMENT = 0x02
+    WRITE_ARTICLES = 0x04
+    MODERATE_COMMENTS = 0x08
+    ADMINISTRATOR = 0x80
 
 class DBHelper():
 
     def connect(self, database=dbconfig.db_name):
         return pymysql.connect(host=dbconfig.dev_host, user=dbconfig.db_user,
-                               passwd=dbconfig.db_password, db=database)
+                               passwd=dbconfig.db_password, db=database,
+                               cursorclass=pymysql.cursors.DictCursor)
 
     def get_all_users(self):
         connection = self.connect()
@@ -24,7 +30,7 @@ class DBHelper():
     def get_user_login(self, email):
         connection = self.connect()
         try:
-            query = "SELECT email, password, confirmed FROM blog.users WHERE email = %(email)s"
+            query = "SELECT email, password, confirmed, roles_id FROM blog.users WHERE email = %(email)s"
             with connection.cursor() as cursor:
                 cursor.execute(query, {"email": email})
                 return cursor.fetchall()
@@ -59,7 +65,6 @@ class DBHelper():
         conn = self.connect()
 
         try:
-                # query = "INSERT INTO roles (name, default_permission, permissions) VALUES (%s, %s, %s);"
                 query = "UPDATE blog.roles SET permissions = %s WHERE roles_id = %s"
                 with conn.cursor() as cursor:
                     cursor.execute(query, (permissions, roles_id))
@@ -67,12 +72,26 @@ class DBHelper():
         finally:
           conn.close()
 
-class Permission:
-    FOLLOW = 0x01
-    COMMENT = 0x02
-    WRITE_ARTICLES = 0x04
-    MODERATE_COMMENTS = 0x08
-    ADMINISTRATOR = 0x80
+    def update_user_permissions(self, roles, email):
+        conn = self.connect()
+
+        try:
+            query = "UPDATE blog.users SET roles_id = %(roles)s WHERE email = %(email)s"
+            with conn.cursor() as cursor:
+                cursor.execute(query)
+                conn.commit()
+        finally:
+            conn.close()
+
+    def update_confirmed_state(self, user):
+        conn = self.connect()
+        try:
+            query = "UPDATE blog.users SET confirmed = %s WHERE email = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (user.confirmed, user.email))
+                conn.commit()
+        finally:
+            conn.close()
 
 class DBRole:
     def update_role_permissions(self, roles_id, permissions):
@@ -96,16 +115,3 @@ class DBRole:
                 return cursor.fetchall()
         finally:
             conn.close()
-
-roles = {
-            'User': (True, Permission.FOLLOW | Permission.COMMENT),
-            'Moderator': (False, Permission.FOLLOW | Permission.COMMENT | Permission.MODERATE_COMMENTS),
-            'Admin': (False, Permission.ADMINISTRATOR)
-        }
-db = DBHelper()
-# db.insert_roles("User", True, Permission.FOLLOW | Permission.COMMENT)
-
-# db.insert_roles("Administrator", False, Permission.ADMINISTRATOR)
-
-
-
