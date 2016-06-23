@@ -43,11 +43,17 @@
           <ul class="nav navbar-nav navbar-right">
               {% if current_user.is_authenticated %}
               <li><a class="blog-nav-item" href="{{ url_for('logout') }}">Sign out</a> </li>
+               <li class="dropdown">
+                    <a class="blog-nav-item" href="#" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+               </li>
+
               {% else %}
               <li><a class="blog-nav-item" href="{{ url_for('login_page') }}">Sign in</a> </li>
+              <li><a class="blog-nav-item" href="{{ url_for("register") }}">Create Account</a> </li>
               {% endif %}
 
-              <li><a class="blog-nav-item" href="{{ url_for("register") }}">Create Account</a> </li>
+
           </ul>
 
         <nav class="blog-nav">
@@ -55,8 +61,6 @@
             <li><a class="blog-nav-item active" href="/">Home</a></li>
             <li><a class="blog-nav-item" href="#">About</a></li>
             <li><a class="blog-nav-item" href="#">Contact</a></li>
-            <li class="dropdown">
-              <a class="blog-nav-item" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
           </ul>
         </nav>
       </div>

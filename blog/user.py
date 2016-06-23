@@ -1,11 +1,12 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
-import dbhelper
+from dbhelper import DBHelper
 import config
 import os, shutil
 
+db = DBHelper()
 
-class User(dbhelper.DBHelper):
+class User:
 
     def __init__(self, email, password, confirmed, role):
         self.email = email
@@ -26,7 +27,8 @@ class User(dbhelper.DBHelper):
         if data.get('confirm') != self.email:
             return False
         self.confirmed = True
-        dbhelper.DBHelper().update_confirmed_state(self.confirmed)
+        print(self)
+        db.update_confirmed_state(self)
         return True
 
     def get_id(self):

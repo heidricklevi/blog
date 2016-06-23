@@ -1,5 +1,6 @@
 import pymysql
 import dbconfig
+import datetime
 
 
 class Permission:
@@ -115,3 +116,10 @@ class DBRole:
                 return cursor.fetchall()
         finally:
             conn.close()
+
+# from user import User
+# db = DBHelper()
+# use = user.User("test1@testemail.com", "12434235234", False, 1)
+# # db.create_user(use.role, use.email, use.email, datetime.datetime.now(), use.password, datetime.datetime.now(), use.confirmed)
+# use.confirmed = True
+# db.update_confirmed_state(use)
