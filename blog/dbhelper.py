@@ -17,6 +17,18 @@ class DBHelper():
                                passwd=dbconfig.db_password, db=database,
                                cursorclass=pymysql.cursors.DictCursor)
 
+    def get_user_data(self, id):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM blog.users WHERE id = %s;"
+            with connection.cursor() as cursor:
+                cursor.execute(query, id)
+            return cursor.fetchall()
+
+        finally:
+            connection.close()
+
+
     def get_all_users(self):
         connection = self.connect()
         try:
@@ -58,7 +70,7 @@ class DBHelper():
                 cursor.execute(query, (roles_id, name, email, registration_date, password, modified_at, confirmed))
                 connection.commit()
         except Exception as e:
-            print(e)
+                print(e)
         finally:
             connection.close()
 
@@ -90,6 +102,38 @@ class DBHelper():
             query = "UPDATE blog.users SET confirmed = %s WHERE email = %s"
             with conn.cursor() as cursor:
                 cursor.execute(query, (user.confirmed, user.email))
+                conn.commit()
+        finally:
+            conn.close()
+
+    def get_modified_date_time(self, email):
+        conn = self.connect()
+        try:
+            query = "SELECT modified_at FROM blog.users WHERE email = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (email))
+                conn.commit()
+                return cursor.fetchall()
+        except:
+            conn.close()
+
+    def get_registration_date(self, email):
+        conn = self.connect()
+        try:
+            query = "SELECT registration_date FROM blog.users WHERE email = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (email))
+                conn.commit()
+                return cursor.fetchall()
+        except:
+            conn.close()
+
+    def update_modified_time(self, modified_at, email):
+        conn = self.connect()
+        try:
+            query = "UPDATE blog.users SET modified_at = %s WHERE email = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (modified_at, email))
                 conn.commit()
         finally:
             conn.close()

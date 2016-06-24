@@ -1,3 +1,5 @@
+import datetime
+
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from dbhelper import DBHelper
@@ -9,10 +11,19 @@ db = DBHelper()
 class User:
 
     def __init__(self, email, password, confirmed, role):
+        self.modifified_date = db.get_modified_date_time(email)
+        if self.modifified_date is None:
+            self.modifified_date = datetime.datetime.now()
+
+        self.registration_date = db.get_registration_date(email)
         self.email = email
         self.password = password
         self.role = role
         self.confirmed = confirmed
+
+    def ping(self):
+        self.modifified_date = datetime.datetime.utcnow()
+        db.update_modified_time(self.modifified_date, self.email)
 
     def generate_confirmation_token(self, expiration=3600):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)

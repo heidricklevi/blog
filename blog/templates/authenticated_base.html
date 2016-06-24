@@ -43,6 +43,8 @@
           <ul class="nav navbar-nav navbar-right">
               {% if current_user.is_authenticated %}
               <li><a class="blog-nav-item" href="{{ url_for('logout') }}">Sign out</a> </li>
+              <li><a class="blog-nav-item" href="{{ url_for('account') }}">Account</a></li>
+              <li><a class="blog-nav-item" href="{{ url_for('user', id=current_user.email) }}">Profile</a></li>
               {% else %}
               <li><a class="blog-nav-item" href="{{ url_for('login') }}">Sign in</a> </li>
               {% endif %}
@@ -52,15 +54,9 @@
             <li><a class="blog-nav-item active" href="/">Home</a></li>
             <li><a class="blog-nav-item" href="#">About</a></li>
             <li><a class="blog-nav-item" href="#">Contact</a></li>
-            <li class="dropdown">
-              <a class="blog-nav-item" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-                 <ul class="dropdown-menu">
-                   <li><a href="/login">Sign in</a></li>
-                   <li><a href="/register">Create Account</a></li>
 
 {#        </nav>#}
-
-                 </ul>
+          </ul>
           </ul>
         </nav>
       </div>
@@ -95,6 +91,9 @@
 {#    {{ moment.include_moment() }}#}
 {#    {% endblock %}#}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {% block scripts %}
+      {{ moment.include_moment() }}
+    {% endblock %}
     <script>window.jQuery || document.write('<script src="../static/js/jquery.min.js"><\/script>')</script>
     <script src="../static/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -1,0 +1,26 @@
+{% extends "authenticated_base.html" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ user[0]['name'] }}</h1>
+    {% if user[0]['email'] or user[0]['location']%}
+    <p>
+        {% if user[0]['email'] %}{{ user[0]['email']}}{% endif %}
+        {% if user.location %}
+            From <a href="http://maps.google.com/?q={{ user[0]['location']}}">{{ user[0]['location']}}</a>
+        {% endif %}
+
+    </p>
+    {% endif %}
+
+    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+
+    <p>
+        Member Since {{ moment(user[0]['registration_date']).format('LL') }}
+
+        Last Seen {{ moment(user[0]['modified_at']).fromNow() }}
+    </p>
+    </div>
+
+
+{% endblock %}

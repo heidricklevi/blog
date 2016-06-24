@@ -4,6 +4,7 @@ from flask.ext.login import LoginManager, login_required, login_user, logout_use
 from flask.ext.moment import Moment
 from dbhelper import DBHelper
 import config
+from flask.ext.moment import Moment
 from user import User
 import bcrypt
 from forms import RegistrationForm, LoginForm
@@ -54,10 +55,11 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 def home():
     return render_template("index.html")
 
-# @application.before_request
-# def before_request():
-#     if current_user.is_authenticated and not current_user.confirmed:
-#         return redirect(url_for('unconfirmed'))
+@application.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.ping()
+
 #
 # @application.route('/unconfirmed')
 # def unconfirmed():
@@ -75,6 +77,20 @@ def resend_confirmation():
 
     send_email(config.from_address, config.mail_password, config.to_address, "Confirmation Email", user=user, token=token)
     return redirect(url_for('home'))
+
+@application.route('/account')
+@login_required
+def account():
+    return render_template("account.html")
+
+@application.route('/user/<id>')
+def user(id):
+    user = DB.get_user_data(id)
+    if user is None:
+        abort(404)
+    return render_template("user.html", user=user)
+
+
 
 @application.route('/confirm/<token>')
 @login_required
