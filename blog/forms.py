@@ -1,8 +1,10 @@
 from flask_wtf import Form
-from wtforms import PasswordField, TextField
-from wtforms import SubmitField
+from wtforms import PasswordField, TextField, TextAreaField
+from wtforms import SubmitField, StringField
 from wtforms.fields.html5 import EmailField
 from wtforms import validators
+from wtforms.validators import Length
+
 
 class RegistrationForm(Form):
     name = TextField('name', validators=[validators.DataRequired()])
@@ -16,3 +18,9 @@ class LoginForm(Form):
     email = EmailField('email', validators=[validators.DataRequired(), validators.Email()])
     password = PasswordField('password', validators=[validators.DataRequired()])
     submit = SubmitField('submit', [validators.DataRequired()])
+
+class EditProfileForm(Form):
+    name = StringField('Real Name', validators=[Length(0, 64)])
+    location = StringField("Location", validators=[Length(0,64)])
+    about_me = TextAreaField('About Me')
+    submit = SubmitField('Submit')

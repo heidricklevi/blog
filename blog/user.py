@@ -16,6 +16,9 @@ class User:
             self.modifified_date = datetime.datetime.now()
 
         self.registration_date = db.get_registration_date(email)
+        self.name = db.get_user_data(email)[0]['name']
+        self.location = db.get_user_data(email)[0]['location']
+        self.about_me = db.get_user_data(email)[0]['about_me']
         self.email = email
         self.password = password
         self.role = role

@@ -7,7 +7,7 @@ import config
 from flask.ext.moment import Moment
 from user import User
 import bcrypt
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, EditProfileForm
 from flask_mail import Mail
 from flask.ext.mail import Message
 import smtplib
@@ -83,12 +83,28 @@ def resend_confirmation():
 def account():
     return render_template("account.html")
 
-@application.route('/user/<id>')
-def user(id):
-    user = DB.get_user_data(id)
+@application.route('/user/<name>')
+def user(name):
+    current = current_user._get_current_object()
+    user = DB.get_user_data(current.email)
     if user is None:
         abort(404)
     return render_template("user.html", user=user)
+
+@application.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.name = form.name.data
+        current_user.location = form.location.data
+        current_user.about_me = form.about_me.data
+        DB.update_user_profile(current_user)
+        return redirect(url_for('.user', name=current_user.name))
+    form.name.data = current_user.name
+    form.location.data = current_user.location
+    form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', form=form)
 
 
 

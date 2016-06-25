@@ -44,7 +44,7 @@
               {% if current_user.is_authenticated %}
               <li><a class="blog-nav-item" href="{{ url_for('logout') }}">Sign out</a> </li>
               <li><a class="blog-nav-item" href="{{ url_for('account') }}">Account</a></li>
-              <li><a class="blog-nav-item" href="{{ url_for('user', id=current_user.email) }}">Profile</a></li>
+              <li><a class="blog-nav-item" href="{{ url_for('user', name=current_user.name) }}">Profile</a></li>
               {% else %}
               <li><a class="blog-nav-item" href="{{ url_for('login') }}">Sign in</a> </li>
               {% endif %}

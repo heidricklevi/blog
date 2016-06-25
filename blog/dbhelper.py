@@ -17,12 +17,12 @@ class DBHelper():
                                passwd=dbconfig.db_password, db=database,
                                cursorclass=pymysql.cursors.DictCursor)
 
-    def get_user_data(self, id):
+    def get_user_data(self, email):
         connection = self.connect()
         try:
-            query = "SELECT * FROM blog.users WHERE id = %s;"
+            query = "SELECT * FROM blog.users WHERE email = %s;"
             with connection.cursor() as cursor:
-                cursor.execute(query, id)
+                cursor.execute(query, email)
             return cursor.fetchall()
 
         finally:
@@ -92,6 +92,17 @@ class DBHelper():
             query = "UPDATE blog.users SET roles_id = %(roles)s WHERE email = %(email)s"
             with conn.cursor() as cursor:
                 cursor.execute(query)
+                conn.commit()
+        finally:
+            conn.close()
+
+
+    def update_user_profile(self, user):
+        conn = self.connect()
+        try:
+            query = "UPDATE blog.users SET name = %s, location = %s, about_me = %s WHERE email = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (user.name, user.location, user.about_me, user.email))
                 conn.commit()
         finally:
             conn.close()
