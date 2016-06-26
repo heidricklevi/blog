@@ -138,9 +138,11 @@ def create_user():
         return render_template("register.html", registrationform=form)
 
     hashed = bcrypt.hashpw(str(form.password.data).encode(), bcrypt.gensalt())
-    DB.create_user(ROLE_USER, form.name.data, form.email.data, datetime.datetime.now(), hashed,
+
+    ROLE = ROLE_ADMINISTRATOR if form.email.data in config.administrators else ROLE_USER
+    DB.create_user(ROLE, form.name.data, form.email.data, datetime.datetime.now(), hashed,
                        datetime.datetime.now(), False)
-    user = User(form.email.data, hashed, False, ROLE_USER)
+    user = User(form.email.data, hashed, False, ROLE)
 
     token = User.generate_confirmation_token(user, expiration=3600)
     send_email(config.mail_username, config.mail_password, config.to_address, "test", user=user, token=token)
@@ -155,6 +157,20 @@ def admin_panel():
     if user.role != ROLE_ADMINISTRATOR:
         abort(403)
     return render_template("admin.html", records=records)
+
+@application.route('/admin/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_user(id):
+    user = current_user._get_current_object()
+    print(user.id)
+    if user.role != ROLE_ADMINISTRATOR:  # Extra precautionary
+        abort(403)
+    if user.id == id:
+        abort(403)  # current logged in admin cannot delete themselves
+
+    DB.delete_user(id)
+    return redirect(url_for('admin_panel'))
+
 
 @application.route("/logout")
 @login_required

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="table" xmlns:width="http://www.w3.org/1999/xhtml">
 
-    <table class="table" style="width:100%">
+    <table class="table" id="admin_table" style="width:100%">
         <th>ID</th>
         <th>roles_id</th>
         <th>Name</th>
@@ -23,8 +23,16 @@
             <td>{{ record.password }}</td>
             <td>{{ record.modified_at }}</td>
             <td>{{ record.confirmed }}</td>
-        </tr>
+            {% if current_user.id != record.id %} {# current logged in admin cannot delete themselves or other admins #}
+                    {% if record.roles_id != 3 %}
 
+            <td><form action="{{ url_for('delete_user', id=record.id) }}" method="post">
+                <input type="submit" class="btn-primary" value="Delete">
+                </form>
+            </td>
+                    {% endif %}
+            {% endif %}
+        </tr>
     {% endfor %}
     </table>
   </div>

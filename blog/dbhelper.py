@@ -15,7 +15,17 @@ class DBHelper():
     def connect(self, database=dbconfig.db_name):
         return pymysql.connect(host=dbconfig.dev_host, user=dbconfig.db_user,
                                passwd=dbconfig.db_password, db=database,
-                               cursorclass=pymysql.cursors.DictCursor)
+                               cursorclass=pymysql.cursors.DictCursor)\
+
+    def delete_user(self, id):
+        conn = self.connect()
+        try:
+            query = "DELETE FROM blog.users WHERE id = %s;"
+            with conn.cursor() as cursor:
+                cursor.execute(query, id)
+                conn.commit()
+        finally:
+            conn.close()
 
     def get_user_data(self, email):
         connection = self.connect()
@@ -171,10 +181,3 @@ class DBRole:
                 return cursor.fetchall()
         finally:
             conn.close()
-
-# from user import User
-# db = DBHelper()
-# use = user.User("test1@testemail.com", "12434235234", False, 1)
-# # db.create_user(use.role, use.email, use.email, datetime.datetime.now(), use.password, datetime.datetime.now(), use.confirmed)
-# use.confirmed = True
-# db.update_confirmed_state(use)

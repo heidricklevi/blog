@@ -19,6 +19,7 @@ class User:
         self.name = db.get_user_data(email)[0]['name']
         self.location = db.get_user_data(email)[0]['location']
         self.about_me = db.get_user_data(email)[0]['about_me']
+        self.id = db.get_user_data(email)[0]['id']
         self.email = email
         self.password = password
         self.role = role
