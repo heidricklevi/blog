@@ -27,12 +27,38 @@ class DBHelper():
         finally:
             conn.close()
 
+    def update_user(self, user):
+        conn = self.connect()
+
+        try:
+            query = "UPDATE blog.users SET roles_id = %s, name = %s, email = %s," \
+                    " registration_date = %s, password = %s, modified_at = %s, confirmed = %s, location = %s, about_me = %s WHERE id = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (user[0]["roles_id"], user[0]["name"], user[0]["email"],
+                                       user[0]["registration_date"], user[0]["password"], user[0]["modified_at"], user[0]["confirmed"],
+                                       user[0]["location"], user[0]["about_me"], user[0]["id"]))
+                conn.commit()
+        finally:
+            conn.close()
+
+
     def get_user_data(self, email):
         connection = self.connect()
         try:
             query = "SELECT * FROM blog.users WHERE email = %s;"
             with connection.cursor() as cursor:
                 cursor.execute(query, email)
+            return cursor.fetchall()
+
+        finally:
+            connection.close()
+
+    def get_user_by_id(self, id):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM blog.users WHERE id = %s;"
+            with connection.cursor() as cursor:
+                cursor.execute(query, id)
             return cursor.fetchall()
 
         finally:

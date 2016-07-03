@@ -7,7 +7,7 @@ import config
 from flask.ext.moment import Moment
 from user import User
 import bcrypt
-from forms import RegistrationForm, LoginForm, EditProfileForm
+from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm
 from flask_mail import Mail
 from flask.ext.mail import Message
 import smtplib
@@ -156,21 +156,39 @@ def admin_panel():
     user = current_user._get_current_object()
     if user.role != ROLE_ADMINISTRATOR:
         abort(403)
-    return render_template("admin.html", records=records)
+    return render_template("admin.html", records=records, form=User_EditForm())
 
 @application.route('/admin/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_user(id):
-    user = current_user._get_current_object()
-    print(user.id)
-    if user.role != ROLE_ADMINISTRATOR:  # Extra precautionary
-        abort(403)
-    if user.id == id:
-        abort(403)  # current logged in admin cannot delete themselves
-
     DB.delete_user(id)
     return redirect(url_for('admin_panel'))
 
+
+@application.route('/admin/update/<id>', methods=['POST'])
+@login_required
+def update_user(id):
+    user = DB.get_user_by_id(id)
+    form = User_EditForm()
+
+    if form.validate_on_submit:
+        user[0]['id'] = id
+        user[0]['location'] = form.location.data
+        user[0]['about_me'] = form.about_me.data
+        user[0]['name'] = form.name.data
+        user[0]['email'] = form.email.data
+        user[0]['confirmed'] = form.confirmed.data
+        user[0]['roles_id'] = form.role.data
+        DB.update_user(user)
+        return redirect(url_for('admin_panel'))
+
+    form.email.data = user[0]['email']
+    form.role.data = user[0]['roles_id']
+    form.confirmed.data = user[0]['confirmed']
+    form.about_me.data = user[0]['about_me']
+    form.location.data = user[0]['location']
+    form.name.data = user[0]['name']
+    return render_template("admin.html", user=user, form=form)
 
 @application.route("/logout")
 @login_required

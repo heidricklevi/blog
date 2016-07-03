@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import PasswordField, TextField, TextAreaField
+from wtforms import PasswordField, TextField, TextAreaField, BooleanField, IntegerField, HiddenField
 from wtforms import SubmitField, StringField
 from wtforms.fields.html5 import EmailField
 from wtforms import validators
@@ -24,3 +24,11 @@ class EditProfileForm(Form):
     location = StringField("Location", validators=[Length(0,64)])
     about_me = TextAreaField('About Me')
     submit = SubmitField('Submit')
+
+class User_EditForm(Form):
+    name = HiddenField("name")
+    location = HiddenField("Location", validators=[Length(0,64)])
+    about_me = HiddenField('About Me')
+    email = HiddenField('Email', validators=[validators.DataRequired(), Length(1, 64), EmailField()])
+    confirmed = IntegerField("Confirmed")
+    role = IntegerField('role')
