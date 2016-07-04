@@ -2,23 +2,9 @@
 
 
 {% block content %}
-        <script type="text/javascript">
-
-        function getContent() {
-            {#           document.getElementById("locationid").value =document.getElementById("location");#}
-            {#           document.getElementById("roleid").value =document.getElementById("about_me");#}
-{#            document.getElementById("nameid").value = document.getElementById("name").innerHTML;#}
-{#            document.getElementById("confirmedid").value = document.getElementById("confirmed").innerHTML;#}
-{#            document.getElementById("emailid").value = document.getElementById("email").innerHTML;#}
-            document.getElementById("name").value = document.getElementById("name_td").innerHTML;
-            name = document.getElementById("name").value;
-
-            console.log("Name = " + name);
 
 
-        }
 
-    </script>
 <div id="table" class="table" xmlns:width="http://www.w3.org/1999/xhtml">
 
     <table class="table" id="admin_table" style="width:100%">
@@ -33,7 +19,7 @@
 
     {% for record in records %}
         <tr id="table_row">
-        <form action="{{ url_for('update_user', id=record.id) }}" method="post" onsubmit="return getContent()">
+        <form action="{{ url_for('update_user', id=record.id) }}" method="post">
             {{ form.csrf_token }}
             <td>{{ record.id }}</td>
             <td id="roles_id" contenteditable="true">{{ record.roles_id }}</td>
