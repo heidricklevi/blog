@@ -2,27 +2,6 @@
  * Created by LeviJamesH on 7/3/2016.
  */
 
-//$(function (){
-//
-//    var table = document.getElementById("admin_table");
-//    console.log(table);
-//
-//
-//    for (var i = 0, row; row = table.rows[i]; i++) {
-//   //iterate through rows
-//   //rows would be accessed using the "row" variable assigned in the for loop
-//        console.log(row);
-//    for (var j = 0, col; col = row.cells[j]; j++) {
-//     //iterate through columns
-//     //columns would be accessed using the "col" variable assigned in the for loop
-//
-//        console.log(col);
-//   }
-//}
-//
-//
-//});
-
 $(function () {
     $("td").click(function () {
         var sib = this.nextElementSibling;

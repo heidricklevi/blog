@@ -41,6 +41,16 @@ class DBHelper():
         finally:
             conn.close()
 
+    def insert_gravatar_hash(self, email, hash):
+        conn = self.connect()
+        try:
+            query = "UPDATE blog.users SET gravatar_hash = %s WHERE email = %s; "
+            with conn.cursor() as cursor:
+                cursor.execute(query, (hash, email))
+                conn.commit()
+        finally:
+            conn.close()
+
 
     def get_user_data(self, email):
         connection = self.connect()

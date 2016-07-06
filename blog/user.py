@@ -1,7 +1,8 @@
 import datetime
+import hashlib
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app
+from flask import current_app, request
 from dbhelper import DBHelper
 import config
 import os, shutil
@@ -20,6 +21,12 @@ class User:
         self.location = db.get_user_data(email)[0]['location']
         self.about_me = db.get_user_data(email)[0]['about_me']
         self.id = db.get_user_data(email)[0]['id']
+        self.gravatar_hash = db.get_user_data(email)[0]['gravatar_hash']
+
+        if self.gravatar_hash is None and email is not None:
+            self.gravatar_hash = hashlib.md5(email.encode('utf-8')).hexdigest()
+            db.insert_gravatar_hash(email, self.gravatar_hash)
+
         self.email = email
         self.password = password
         self.role = role
@@ -45,6 +52,17 @@ class User:
         print(self)
         db.update_confirmed_state(self)
         return True
+
+    def gravatar(self, size=180, default='identicon', rating='g'):
+        if request.is_secure:
+            url = "https://secure.gravatar.com/avatar"
+        else:
+            url = "http://www.gravatar.com/avatar"
+
+        hash = self.gravatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=url, hash=hash, size=size, default=default, rating=rating
+        )
 
     def get_id(self):
         return self.email

@@ -87,9 +87,10 @@ def account():
 def user(name):
     current = current_user._get_current_object()
     user = DB.get_user_data(current.email)
+    user_one = User(user[0]['email'], user[0]['password'], user[0]['confirmed'], user[0]['roles_id'])
     if user is None:
         abort(404)
-    return render_template("user.html", user=user)
+    return render_template("user.html", user=user, user_one=user_one)
 
 @application.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -163,6 +164,8 @@ def admin_panel():
 def delete_user(id):
     DB.delete_user(id)
     return redirect(url_for('admin_panel'))
+
+
 
 
 @application.route('/admin/update/<id>', methods=['POST'])

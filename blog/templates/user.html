@@ -1,8 +1,15 @@
 {% extends "authenticated_base.html" %}
 
 {% block content %}
+    <div class="align-left">
+      <div class="col-sm-offset-3">
+        <img src="{{ user_one.gravatar(size=256) }}" class="img-rounded">
+    </div>
+    </div>
+
     <div class="page-header">
         <h1>{{ user[0]['name'] }}</h1>
+
     {% if user[0]['email'] or user[0]['location']%}
     <p>
         {% if user[0]['email'] %}{{ user[0]['email']}}{% endif %}
