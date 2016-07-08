@@ -7,7 +7,7 @@ import config
 from flask.ext.moment import Moment
 from user import User
 import bcrypt
-from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm
+from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm
 from flask_mail import Mail
 from flask.ext.mail import Message
 import smtplib
@@ -44,16 +44,24 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
         server.login(gmail_user, gmail_pwd)
         server.sendmail(FROM, TO, message)
         server.close()
-        print('successfully sent the mail')
+        print('successfully sent the email')
     except:
         print("failed to send mail")
 
 
 
 
-@application.route('/')
+@application.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("index.html")
+    form = PostForm()
+    user = current_user._get_current_object()
+
+    if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
+        DB.create_blog_post(author_id=user.id, body=form.body.data, post_time=datetime.datetime.now())
+
+
+    posts = DB.get_all_posts()
+    return render_template("index.html", form=form, posts=posts)
 
 @application.before_request
 def before_request():

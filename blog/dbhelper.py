@@ -120,6 +120,17 @@ class DBHelper():
         finally:
             connection.close()
 
+    def create_blog_post(self, author_id, body, post_time):
+        conn = self.connect()
+        try:
+            query = "INSERT INTO posts (author_id, body, post_time) VALUES (%s, %s, %s);"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (author_id, body, post_time))
+                conn.commit()
+        finally:
+            conn.close()
+
+
     def insert_roles(self, roles_id, permissions):
         conn = self.connect()
 
@@ -130,6 +141,17 @@ class DBHelper():
                     conn.commit()
         finally:
           conn.close()
+
+    def get_all_posts(self):
+        conn = self.connect()
+        try:
+            query = "SELECT * FROM blog.posts ORDER BY post_time DESC;"
+            with conn.cursor() as cursor:
+                cursor.execute(query)
+                conn.commit()
+                return cursor.fetchall()
+        finally:
+            conn.close()
 
     def update_user_permissions(self, roles, email):
         conn = self.connect()

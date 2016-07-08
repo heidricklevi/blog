@@ -32,3 +32,7 @@ class User_EditForm(Form):
     email = HiddenField('Email', validators=[validators.DataRequired(), Length(1, 64), EmailField()])
     confirmed = IntegerField("Confirmed")
     role = IntegerField('role')
+
+class PostForm(Form):
+    body = HiddenField("Type Blog content here.", validators=[validators.DataRequired()])
+    submit = SubmitField("Submit")

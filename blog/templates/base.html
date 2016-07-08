@@ -66,19 +66,25 @@
     </div>
 
     <div class="container">
-
-    {% block blog_header %}
       <div class="blog-header">
-        <h1 class="blog-title">The Bootstrap Blog</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+
+        <h1 class="blog-title">{% block blog_title %}The Bootstrap Blog {% endblock %}</h1>
+        <p class="lead blog-description">{% block blog_title_description %}The official example template of creating a blog with Bootstrap.{% endblock %}</p>
       </div>
-    {% endblock %}
+
+    {% block create_post %}
+      {% endblock %}
 
       <div class="row">
 
+
         <div class="col-sm-8 blog-main">
+          <div class="blog-post">
             {% block content %}
-            {% endblock %}
+              {% endblock %}
+          </div><!-- /.blog-post -->
+{#            {% block content %}#}
+{#            {% endblock %}#}
 
           <nav>
             <ul class="pager">

@@ -164,3 +164,26 @@ h6, .h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+textarea {
+  width: 100%;
+  min-height: 50px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #444;
+  padding: 5px;
+  overflow: hidden;
+  resize: none;
+}
+
+.text_post {
+
+  min-height: 50px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #444;
+  padding: 5px;
+
+}
+
+

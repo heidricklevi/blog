@@ -31,6 +31,19 @@ try:
               PRIMARY KEY (roles_id)
               )"""
         cursor.execute(sql)
+
+        sql = """CREATE TABLE IF NOT EXISTS blog.posts (
+
+              posts_id int NOT NULL AUTO_INCREMENT,
+              author_id int,
+              body VARCHAR(255),
+              post_time TIMESTAMP,
+              FOREIGN KEY (author_id) REFERENCES blog.users(id),
+              PRIMARY KEY (posts_id)
+              )"""
+
+        cursor.execute(sql)
+
     connection.commit()
 finally:
     connection.close()
