@@ -5,7 +5,7 @@ from flask.ext.moment import Moment
 from dbhelper import DBHelper
 import config
 from flask.ext.moment import Moment
-from user import User
+from user import User, AnonymousUser
 import bcrypt
 from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm
 from flask_mail import Mail
@@ -55,13 +55,13 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 def home():
     form = PostForm()
     user = current_user._get_current_object()
-
-    if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
-        DB.create_blog_post(author_id=user.id, body=form.body.data, post_time=datetime.datetime.now())
+    if not current_user.is_anonymous:
+        if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
+            DB.create_blog_post(author_id=user.id, body=request.form['text_post'], post_time=datetime.datetime.now())
 
 
     posts = DB.get_all_posts()
-    return render_template("index.html", form=form, posts=posts)
+    return render_template("index.html", form=form, posts=posts, user=user)
 
 @application.before_request
 def before_request():
@@ -94,10 +94,12 @@ def account():
 @application.route('/user/<name>')
 def user(name):
     current = current_user._get_current_object()
-    user = DB.get_user_data(current.email)
-    user_one = User(user[0]['email'], user[0]['password'], user[0]['confirmed'], user[0]['roles_id'])
+    # user = DB.get_user_data(current.email)
+    user = DB.get_user_by_name(name)
     if user is None:
         abort(404)
+
+    user_one = User(user[0]['email'], user[0]['password'], user[0]['confirmed'], user[0]['roles_id'])
     return render_template("user.html", user=user, user_one=user_one)
 
 @application.route('/edit-profile', methods=['GET', 'POST'])

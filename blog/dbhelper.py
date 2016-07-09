@@ -27,6 +27,17 @@ class DBHelper():
         finally:
             conn.close()
 
+    def get_user_by_name(self, name):  # temp until unique username is added to db
+        conn = self.connect()
+        try:
+            query = "SELECT * FROM blog.users WHERE name = %s;"
+            with conn.cursor() as cursor:
+                cursor.execute(query, name)
+                return cursor.fetchall()
+        finally:
+            conn.close()
+
+
     def update_user(self, user):
         conn = self.connect()
 
@@ -145,7 +156,8 @@ class DBHelper():
     def get_all_posts(self):
         conn = self.connect()
         try:
-            query = "SELECT * FROM blog.posts ORDER BY post_time DESC;"
+            query = "select users.name, posts.author_id, posts.body, posts.post_time, posts.posts_id " \
+                    "from blog.posts join users on posts.author_id = users.id ORDER BY post_time DESC;"
             with conn.cursor() as cursor:
                 cursor.execute(query)
                 conn.commit()

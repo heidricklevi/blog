@@ -36,7 +36,7 @@ try:
 
               posts_id int NOT NULL AUTO_INCREMENT,
               author_id int,
-              body VARCHAR(255),
+              body VARCHAR(21830),
               post_time TIMESTAMP,
               FOREIGN KEY (author_id) REFERENCES blog.users(id),
               PRIMARY KEY (posts_id)

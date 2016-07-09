@@ -15,10 +15,10 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/blog$dbhelper.coverage" NAME="dbhelper Coverage Results" MODIFIED="1466948621876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blog$application.coverage" NAME="application Coverage Results" MODIFIED="1467991905369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blog$application.coverage" NAME="application Coverage Results" MODIFIED="1468067599074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blog$user.coverage" NAME="user Coverage Results" MODIFIED="1466594971219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blog$config.coverage" NAME="config Coverage Results" MODIFIED="1466506768285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blog$dbsetup.coverage" NAME="dbsetup Coverage Results" MODIFIED="1467991859082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blog$dbsetup.coverage" NAME="dbsetup Coverage Results" MODIFIED="1468067574911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blog$passwordhelper.coverage" NAME="passwordhelper Coverage Results" MODIFIED="1465402684007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blog$blog.coverage" NAME="blog Coverage Results" MODIFIED="1465223443927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/blog$copy_proj_to_prod_dir.coverage" NAME="copy_proj_to_prod_dir Coverage Results" MODIFIED="1465921266196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop" />
@@ -32,14 +32,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="application.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="application.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.49673203">
+              <caret line="101" column="101" selection-start-line="101" selection-start-column="101" selection-end-line="101" selection-end-column="101" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <marker date="1467992213615" expanded="true" signature="7772:7793" placeholder="..." />
+                <marker date="1468082837313" expanded="true" signature="7894:7915" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/user.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.806452">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="84" column="19" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,8 +70,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1290324">
-              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+            <state vertical-scroll-proportion="-13.064516">
+              <caret line="34" column="127" selection-start-line="34" selection-start-column="127" selection-end-line="34" selection-end-column="127" />
               <folding />
             </state>
           </provider>
@@ -65,31 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6168831">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="blog.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/css/blog.css">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="172" column="7" selection-start-line="172" selection-start-column="7" selection-end-line="172" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.354839">
-              <caret line="121" column="13" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,32 +101,44 @@
         <entry file="file://$PROJECT_DIR$/dbhelper.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
+              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
               <folding>
-                <marker date="1467898212304" expanded="true" signature="573:609" placeholder="DELETE FROM " />
-                <marker date="1467898212304" expanded="true" signature="867:1067" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="1625:1682" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="1961:2002" placeholder="SELECT * FRO... users" />
-                <marker date="1467898212304" expanded="true" signature="2289:2327" placeholder="SELECT * FRO... users" />
-                <marker date="1467898212304" expanded="true" signature="2607:2631" placeholder="SELECT * FRO... users" />
-                <marker date="1467898212304" expanded="true" signature="2914:2997" placeholder="SELECT email... users" />
-                <marker date="1467898212304" expanded="true" signature="3295:3347" placeholder="SELECT email... users" />
-                <marker date="1467898212304" expanded="true" signature="3714:3844" placeholder="INSERT INTO users... " />
-                <marker date="1467898212304" expanded="true" signature="4276:4293" placeholder="INSERT INTO posts... " />
-                <marker date="1467898212304" expanded="true" signature="4276:4342" placeholder="INSERT INTO posts... " />
-                <marker date="1467898212304" expanded="true" signature="4649:4707" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="4990:5014" placeholder="SELECT * FRO... posts" />
-                <marker date="1467898212304" expanded="true" signature="4990:5023" placeholder="SELECT * FRO... posts" />
-                <marker date="1467898212304" expanded="true" signature="4990:5038" placeholder="SELECT * FRO... posts" />
-                <marker date="1467898212304" expanded="true" signature="5353:5419" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="5680:5758" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="6076:6129" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="6423:6474" placeholder="SELECT modif... users" />
-                <marker date="1467898212304" expanded="true" signature="6786:6843" placeholder="SELECT regis... users" />
-                <marker date="1467898212304" expanded="true" signature="7167:7222" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="7585:7643" placeholder="UPDATE blog.... " />
-                <marker date="1467898212304" expanded="true" signature="7970:8016" placeholder="SELECT * FRO... roles" />
+                <marker date="1468082837299" expanded="true" signature="573:609" placeholder="DELETE FROM " />
+                <marker date="1468082837299" expanded="true" signature="916:955" placeholder="SELECT * FRO... users" />
+                <marker date="1468082837299" expanded="true" signature="916:956" placeholder="SELECT * FRO... users" />
+                <marker date="1468082837299" expanded="true" signature="1228:1428" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="1986:2043" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="2322:2363" placeholder="SELECT * FRO... users" />
+                <marker date="1468082837299" expanded="true" signature="2650:2688" placeholder="SELECT * FRO... users" />
+                <marker date="1468082837299" expanded="true" signature="2968:2992" placeholder="SELECT * FRO... users" />
+                <marker date="1468082837299" expanded="true" signature="3275:3358" placeholder="SELECT email... users" />
+                <marker date="1468082837299" expanded="true" signature="3656:3708" placeholder="SELECT email... users" />
+                <marker date="1468082837299" expanded="true" signature="4075:4205" placeholder="INSERT INTO users... " />
+                <marker date="1468082837299" expanded="true" signature="4637:4654" placeholder="INSERT INTO posts... " />
+                <marker date="1468082837299" expanded="true" signature="4637:4703" placeholder="INSERT INTO posts... " />
+                <marker date="1468082837299" expanded="true" signature="5010:5068" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="5351:5512" placeholder="select users... posts" />
+                <marker date="1468082837299" expanded="true" signature="5351:5521" placeholder="SELECT * FRO... posts" />
+                <marker date="1468082837299" expanded="true" signature="5351:5536" placeholder="SELECT * FRO... posts" />
+                <marker date="1468082837299" expanded="true" signature="5851:5917" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="6178:6256" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="6574:6627" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="6921:6972" placeholder="SELECT modif... users" />
+                <marker date="1468082837299" expanded="true" signature="7284:7341" placeholder="SELECT regis... users" />
+                <marker date="1468082837299" expanded="true" signature="7665:7720" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="8083:8141" placeholder="UPDATE blog.... " />
+                <marker date="1468082837299" expanded="true" signature="8468:8514" placeholder="SELECT * FRO... roles" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.935484">
+              <caret line="148" column="57" selection-start-line="148" selection-start-column="57" selection-end-line="148" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,7 +146,7 @@
       <file leaf-file-name="admin.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/admin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.7096774">
+            <state vertical-scroll-proportion="12.064516">
               <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
               <folding />
             </state>
@@ -143,23 +157,11 @@
         <entry file="file://$PROJECT_DIR$/dbsetup.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
               <folding>
-                <marker date="1467991855099" expanded="true" signature="284:717" placeholder="CREATE TABLE... IF" />
-                <marker date="1467991855099" expanded="true" signature="768:1025" placeholder="CREATE TABLE... IF" />
-                <marker date="1467991855099" expanded="true" signature="1075:1382" placeholder="CREATE TABLE... IF" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="22" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <marker date="1468067574907" expanded="true" signature="284:717" placeholder="CREATE TABLE... IF" />
+                <marker date="1468067574907" expanded="true" signature="768:1025" placeholder="CREATE TABLE... IF" />
+                <marker date="1468067574907" expanded="true" signature="1075:1384" placeholder="CREATE TABLE... IF" />
               </folding>
             </state>
           </provider>
@@ -195,16 +197,16 @@
         <option value="$PROJECT_DIR$/templates/admin.html" />
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/templates/edit_profile.html" />
-        <option value="$PROJECT_DIR$/user.py" />
         <option value="$PROJECT_DIR$/templates/user.html" />
-        <option value="$PROJECT_DIR$/dbhelper.py" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/forms.py" />
         <option value="$PROJECT_DIR$/static/css/blog.css" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/dbsetup.py" />
-        <option value="$PROJECT_DIR$/application.py" />
         <option value="$PROJECT_DIR$/static/js/app.js" />
+        <option value="$PROJECT_DIR$/dbsetup.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/user.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/dbhelper.py" />
+        <option value="$PROJECT_DIR$/application.py" />
       </list>
     </option>
   </component>
@@ -216,8 +218,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1098" />
+    <option name="width" value="1932" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -244,7 +246,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -310,26 +311,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -340,15 +324,16 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\js" />
+      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\css" />
+      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\img\user" />
+      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\img" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\css" />
       <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static" />
       <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\templates" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\img\user" />
-      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\img" />
-      <recent name="C:\Users\Levi James H\AppData\Local\Programs\Python\Python35-32\Scripts\blog\static\js" />
     </key>
   </component>
   <component name="RunManager" selected="Python.application">
@@ -642,16 +627,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1098" extended-state="7" />
+    <frame x="-9" y="-9" width="1932" height="1092" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1359375" sideWeight="0.48826292" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13584118" sideWeight="0.48826292" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32746115" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3274244" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.136936" sideWeight="0.5117371" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -689,17 +674,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/application.py</url>
-          <line>152</line>
+          <line>154</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/application.py</url>
-          <line>162</line>
+          <line>164</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/application.py</url>
-          <line>184</line>
+          <line>186</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
@@ -708,21 +693,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -764,7 +734,7 @@
           <caret line="17" column="0" selection-start-line="17" selection-start-column="2" selection-end-line="25" selection-end-column="45" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1467992213615" expanded="true" signature="7772:7793" placeholder="..." />
+            <marker date="1468082837313" expanded="true" signature="7894:7915" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -831,7 +801,7 @@
           <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1467992213615" expanded="true" signature="7772:7793" placeholder="..." />
+            <marker date="1468082837313" expanded="true" signature="7894:7915" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -863,7 +833,7 @@
           <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1467992213615" expanded="true" signature="7772:7793" placeholder="..." />
+            <marker date="1468082837313" expanded="true" signature="7894:7915" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -973,20 +943,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/edit_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.806452">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dbconfig.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -994,19 +950,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1015,46 +962,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="172" column="7" selection-start-line="172" selection-start-column="7" selection-end-line="172" selection-end-column="7" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.354839">
-          <caret line="121" column="13" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbhelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
-          <folding>
-            <marker date="1467898212304" expanded="true" signature="573:609" placeholder="DELETE FROM " />
-            <marker date="1467898212304" expanded="true" signature="867:1067" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="1625:1682" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="1961:2002" placeholder="SELECT * FRO... users" />
-            <marker date="1467898212304" expanded="true" signature="2289:2327" placeholder="SELECT * FRO... users" />
-            <marker date="1467898212304" expanded="true" signature="2607:2631" placeholder="SELECT * FRO... users" />
-            <marker date="1467898212304" expanded="true" signature="2914:2997" placeholder="SELECT email... users" />
-            <marker date="1467898212304" expanded="true" signature="3295:3347" placeholder="SELECT email... users" />
-            <marker date="1467898212304" expanded="true" signature="3714:3844" placeholder="INSERT INTO users... " />
-            <marker date="1467898212304" expanded="true" signature="4276:4293" placeholder="INSERT INTO posts... " />
-            <marker date="1467898212304" expanded="true" signature="4276:4342" placeholder="INSERT INTO posts... " />
-            <marker date="1467898212304" expanded="true" signature="4649:4707" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="4990:5014" placeholder="SELECT * FRO... posts" />
-            <marker date="1467898212304" expanded="true" signature="4990:5023" placeholder="SELECT * FRO... posts" />
-            <marker date="1467898212304" expanded="true" signature="4990:5038" placeholder="SELECT * FRO... posts" />
-            <marker date="1467898212304" expanded="true" signature="5353:5419" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="5680:5758" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="6076:6129" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="6423:6474" placeholder="SELECT modif... users" />
-            <marker date="1467898212304" expanded="true" signature="6786:6843" placeholder="SELECT regis... users" />
-            <marker date="1467898212304" expanded="true" signature="7167:7222" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="7585:7643" placeholder="UPDATE blog.... " />
-            <marker date="1467898212304" expanded="true" signature="7970:8016" placeholder="SELECT * FRO... roles" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1068,6 +975,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/edit_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.757315">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.064516">
+          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/account.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.8387096">
@@ -1076,50 +999,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin.html">
+    <entry file="file://$PROJECT_DIR$/static/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7096774">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/static/css/bootstrap-markdown.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1290324">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/bootstrap-markdown.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.935484">
+          <caret line="148" column="57" selection-start-line="148" selection-start-column="57" selection-end-line="148" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="19" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dbsetup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
           <folding>
-            <marker date="1467991855099" expanded="true" signature="284:717" placeholder="CREATE TABLE... IF" />
-            <marker date="1467991855099" expanded="true" signature="768:1025" placeholder="CREATE TABLE... IF" />
-            <marker date="1467991855099" expanded="true" signature="1075:1382" placeholder="CREATE TABLE... IF" />
+            <marker date="1468067574907" expanded="true" signature="284:717" placeholder="CREATE TABLE... IF" />
+            <marker date="1468067574907" expanded="true" signature="768:1025" placeholder="CREATE TABLE... IF" />
+            <marker date="1468067574907" expanded="true" signature="1075:1384" placeholder="CREATE TABLE... IF" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.064516">
+          <caret line="34" column="127" selection-start-line="34" selection-start-column="127" selection-end-line="34" selection-end-column="127" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbhelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+          <folding>
+            <marker date="1468082837299" expanded="true" signature="573:609" placeholder="DELETE FROM " />
+            <marker date="1468082837299" expanded="true" signature="916:955" placeholder="SELECT * FRO... users" />
+            <marker date="1468082837299" expanded="true" signature="916:956" placeholder="SELECT * FRO... users" />
+            <marker date="1468082837299" expanded="true" signature="1228:1428" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="1986:2043" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="2322:2363" placeholder="SELECT * FRO... users" />
+            <marker date="1468082837299" expanded="true" signature="2650:2688" placeholder="SELECT * FRO... users" />
+            <marker date="1468082837299" expanded="true" signature="2968:2992" placeholder="SELECT * FRO... users" />
+            <marker date="1468082837299" expanded="true" signature="3275:3358" placeholder="SELECT email... users" />
+            <marker date="1468082837299" expanded="true" signature="3656:3708" placeholder="SELECT email... users" />
+            <marker date="1468082837299" expanded="true" signature="4075:4205" placeholder="INSERT INTO users... " />
+            <marker date="1468082837299" expanded="true" signature="4637:4654" placeholder="INSERT INTO posts... " />
+            <marker date="1468082837299" expanded="true" signature="4637:4703" placeholder="INSERT INTO posts... " />
+            <marker date="1468082837299" expanded="true" signature="5010:5068" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="5351:5512" placeholder="select users... posts" />
+            <marker date="1468082837299" expanded="true" signature="5351:5521" placeholder="SELECT * FRO... posts" />
+            <marker date="1468082837299" expanded="true" signature="5351:5536" placeholder="SELECT * FRO... posts" />
+            <marker date="1468082837299" expanded="true" signature="5851:5917" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="6178:6256" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="6574:6627" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="6921:6972" placeholder="SELECT modif... users" />
+            <marker date="1468082837299" expanded="true" signature="7284:7341" placeholder="SELECT regis... users" />
+            <marker date="1468082837299" expanded="true" signature="7665:7720" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="8083:8141" placeholder="UPDATE blog.... " />
+            <marker date="1468082837299" expanded="true" signature="8468:8514" placeholder="SELECT * FRO... roles" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.806452">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.49673203">
+          <caret line="101" column="101" selection-start-line="101" selection-start-column="101" selection-end-line="101" selection-end-column="101" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1467992213615" expanded="true" signature="7772:7793" placeholder="..." />
+            <marker date="1468082837313" expanded="true" signature="7894:7915" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6168831">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

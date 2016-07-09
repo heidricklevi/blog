@@ -1,6 +1,6 @@
 import datetime
 import hashlib
-
+from flask.ext.login import AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request
 from dbhelper import DBHelper
@@ -80,6 +80,9 @@ class User:
         return self.email
 
 
+class AnonymousUser(AnonymousUserMixin):
+    def is_anonymous(self):
+        return True
 
 
 
