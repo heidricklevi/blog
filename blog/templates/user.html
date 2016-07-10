@@ -24,9 +24,25 @@
 
     <p>
         Member Since {{ moment(user[0]['registration_date']).format('LL') }}
-
+        <br />
         Last Seen {{ moment(user[0]['modified_at']).fromNow() }}
     </p>
+    </div>
+
+<h3>Posts by this Author:</h3>
+    <div class="list-group">
+    {% for post in posts %}
+        <div class="list-group-item">
+            <div style="align-self: center">
+                <a href="{{ url_for('.user', name=user[0]['name']) }}">
+                    <img src="{{ user_one.gravatar(size=40) }}">
+                </a>
+            </div>
+           {{ post['post_time'] }}
+
+           <p style="align-content: center">{{ post['body'] }}</p>
+        </div>
+    {% endfor %}
     </div>
 
     {% if user[0]['email'] == current_user.email %}

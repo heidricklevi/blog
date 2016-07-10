@@ -51,17 +51,21 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 
 
 
-@application.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET'])
 def home():
+    posts = DB.get_all_posts()
+    return render_template("index.html", form=PostForm(), posts=posts)
+
+@application.route('/submit_blog_post', methods=["POST"])
+def submit_post():
     form = PostForm()
     user = current_user._get_current_object()
-    if not current_user.is_anonymous:
-        if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
-            DB.create_blog_post(author_id=user.id, body=request.form['text_post'], post_time=datetime.datetime.now())
 
+    if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
+        DB.create_blog_post(author_id=user.id, body=request.form['text_post'], post_time=datetime.datetime.now())
 
-    posts = DB.get_all_posts()
-    return render_template("index.html", form=form, posts=posts, user=user)
+    return redirect(url_for('home'))
+
 
 @application.before_request
 def before_request():
@@ -100,7 +104,9 @@ def user(name):
         abort(404)
 
     user_one = User(user[0]['email'], user[0]['password'], user[0]['confirmed'], user[0]['roles_id'])
-    return render_template("user.html", user=user, user_one=user_one)
+    posts = DB.get_posts_by_user(user[0]["id"])
+
+    return render_template("user.html", user=user, user_one=user_one, posts=posts)
 
 @application.route('/edit-profile', methods=['GET', 'POST'])
 @login_required

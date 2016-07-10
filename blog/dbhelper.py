@@ -153,6 +153,17 @@ class DBHelper():
         finally:
           conn.close()
 
+    def get_posts_by_user(self, id):
+        conn = self.connect()
+        try:
+            query = "SELECT * FROM blog.posts WHERE author_id = %s ORDER BY post_time DESC;"
+            with conn.cursor() as cursor:
+                cursor.execute(query, id)
+                return cursor.fetchall()
+
+        finally:
+            conn.close()
+
     def get_all_posts(self):
         conn = self.connect()
         try:
