@@ -79,13 +79,56 @@ class User:
     def get_email(self):
         return self.email
 
+    @staticmethod
+    def generate_fake_user(count=100):
+        from random import seed
+        import forgery_py
+
+
+        seed()
+        for i in range(count):
+            # u = User(email=forgery_py.internet.email_address(),
+            #          confirmed=True, password=forgery_py.lorem_ipsum.word(),
+            #          role=1)
+
+            email = forgery_py.internet.email_address()
+            confirmed = True
+            password = forgery_py.lorem_ipsum.word()
+            role = 1
+
+            name = forgery_py.internet.user_name()
+            registration_date = forgery_py.date.date(True)
+            modifified_date = forgery_py.date.date(False)
+
+            db.create_user(roles_id=role, name=name, email=email, registration_date=registration_date,
+                           password=password, modified_at=modifified_date, confirmed=confirmed)
+
+            u = User(email=email, password=password, confirmed=confirmed, role=role)
+
+            u.about_me = forgery_py.lorem_ipsum.sentence()
+            u.location = forgery_py.address.city()
+
+
+            db.update_user_profile(u)
+
+    @staticmethod
+    def generate_fake_posts(count=100):
+        from random import seed, randint
+        import forgery_py
+
+
+        seed()
+        users = db.get_all_users()
+        for i in range(count):
+            user = users[randint(0, users.__len__() - 1)]
+            author_id = user['id']
+            body = forgery_py.lorem_ipsum.sentences(randint(1, 10))
+            timestamp = forgery_py.date.date(True)
+
+            db.create_blog_post(author_id=author_id, body=body, post_time=timestamp)
+
 
 class AnonymousUser(AnonymousUserMixin):
     def is_anonymous(self):
         return True
-
-
-
-
-
 

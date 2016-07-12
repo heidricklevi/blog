@@ -30,20 +30,27 @@
     </div>
 
 <h3>Posts by this Author:</h3>
-    <div class="list-group">
+    <ul class="posts">
     {% for post in posts %}
-        <div class="list-group-item">
-            <div style="align-self: center">
+        <li class="blog-post">
+            <div class="post-thumbnail">
                 <a href="{{ url_for('.user', name=user[0]['name']) }}">
-                    <img src="{{ user_one.gravatar(size=40) }}">
+                    <img class="img-rounded profile-thumbnail" src="{{ user_one.gravatar(size=40) }}">
                 </a>
             </div>
-           {{ post['post_time'] }}
+            <div class="post-content">
+                <div class="post-date">{{ post['post_time'] }}</div>
+                <div class="post-author"><a href="{{ url_for('.user', name=user[0]['name']) }}">
+                    {{ user[0]['name'] }}</a></div>
+                <div class="post-body">
+                    {{ post['body'] }}
 
-           <p style="align-content: center">{{ post['body'] }}</p>
-        </div>
+                </div>
+            </div>
+        </li>
+
     {% endfor %}
-    </div>
+    </ul>
 
     {% if user[0]['email'] == current_user.email %}
     <a class="btn btn-primary" href="{{ url_for('.edit_profile') }}">

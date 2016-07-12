@@ -165,17 +165,6 @@ h6, .h6 {
   margin-bottom: 0;
 }
 
-textarea {
-  width: 100%;
-  min-height: 50px;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  color: #444;
-  padding: 5px;
-  overflow: hidden;
-  resize: none;
-}
-
 .text_post {
 
   min-height: 50px;
@@ -185,5 +174,21 @@ textarea {
   padding: 5px;
 
 }
+
+.profile_post_body {
+
+  float: left;
+  position: relative;
+  left: 50%;
+}
+
+.fixer-container {
+
+  float: left;
+  position: relative;
+  left: -50%;
+
+}
+
 
 

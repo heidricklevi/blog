@@ -89,10 +89,12 @@
 {#            {% endblock %}#}
 
           <nav>
+              {% block paginate %}
             <ul class="pager">
               <li><a href="#">Previous</a></li>
               <li><a href="#">Next</a></li>
             </ul>
+              {% endblock %}
           </nav>
 
         </div><!-- /.blog-main -->

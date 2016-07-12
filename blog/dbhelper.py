@@ -262,3 +262,5 @@ class DBRole:
                 return cursor.fetchall()
         finally:
             conn.close()
+
+

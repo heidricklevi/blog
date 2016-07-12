@@ -7,6 +7,7 @@ import config
 from flask.ext.moment import Moment
 from user import User, AnonymousUser
 import bcrypt
+from flask.ext.paginate import Pagination
 from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm
 from flask_mail import Mail
 from flask.ext.mail import Message
@@ -53,8 +54,12 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 
 @application.route('/', methods=['GET'])
 def home():
+    page = request.args.get('page', 1, type=int)
     posts = DB.get_all_posts()
-    return render_template("index.html", form=PostForm(), posts=posts)
+    paginate = Pagination(page=page, per_page=10, record_name='posts', total=posts.__len__(), format_total=True)
+
+
+    return render_template("index.html", form=PostForm(), posts=posts, paginate=paginate)
 
 @application.route('/submit_blog_post', methods=["POST"])
 def submit_post():
