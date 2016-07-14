@@ -87,9 +87,6 @@ class User:
 
         seed()
         for i in range(count):
-            # u = User(email=forgery_py.internet.email_address(),
-            #          confirmed=True, password=forgery_py.lorem_ipsum.word(),
-            #          role=1)
 
             email = forgery_py.internet.email_address()
             confirmed = True

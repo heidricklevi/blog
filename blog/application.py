@@ -52,12 +52,15 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 
 
 
-@application.route('/', methods=['GET'])
-def home():
-    page = request.args.get('page', 1, type=int)
-    posts = DB.get_all_posts()
-    paginate = Pagination(page=page, per_page=10, record_name='posts', total=posts.__len__(), format_total=True)
-
+@application.route('/', defaults={'page':1})
+@application.route('/page/<int:page>')
+def home(page):
+    per_page = 5
+    start_at = page * per_page
+    all_posts = DB.get_all_posts()
+    posts = DB.get_limited_posts(start_at=start_at, per_page=per_page)
+    paginate = Pagination(page=page, per_page=per_page, record_name='posts', total=all_posts.__len__(),
+                          format_total=True, css_framework='bootstrap3')
 
     return render_template("index.html", form=PostForm(), posts=posts, paginate=paginate)
 

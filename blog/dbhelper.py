@@ -164,17 +164,28 @@ class DBHelper():
         finally:
             conn.close()
 
-    def get_all_posts(self):
+    def get_limited_posts(self, start_at, per_page):
         conn = self.connect()
         try:
             query = "select users.name, posts.author_id, posts.body, posts.post_time, posts.posts_id " \
-                    "from blog.posts join users on posts.author_id = users.id ORDER BY post_time DESC;"
+                    "from blog.posts join users on posts.author_id = users.id ORDER BY post_time DESC LIMIT %s, %s;"
             with conn.cursor() as cursor:
-                cursor.execute(query)
+                cursor.execute(query, (start_at, per_page))
                 conn.commit()
                 return cursor.fetchall()
         finally:
             conn.close()
+
+    def get_all_posts(self):
+        con = self.connect()
+        try:
+            query = "select users.name, posts.author_id, posts.body, posts.post_time, posts.posts_id " \
+                    "from blog.posts join users on posts.author_id = users.id ORDER BY post_time;"
+            with con.cursor() as cursor:
+                cursor.execute(query)
+                return cursor.fetchall()
+        finally:
+            con.close()
 
     def update_user_permissions(self, roles, email):
         conn = self.connect()
