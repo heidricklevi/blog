@@ -6,6 +6,7 @@ from dbhelper import DBHelper
 import config
 from flask.ext.moment import Moment
 from user import User, AnonymousUser
+from markdown import markdown
 import bcrypt
 from flask.ext.paginate import Pagination
 from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm
@@ -56,7 +57,13 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 @application.route('/page/<int:page>')
 def home(page):
     per_page = 5
-    start_at = page * per_page
+
+    if page is 1:
+        start_at = 0
+    else:
+        start_at = (page * per_page) - 5
+
+
     all_posts = DB.get_all_posts()
     posts = DB.get_limited_posts(start_at=start_at, per_page=per_page)
     paginate = Pagination(page=page, per_page=per_page, record_name='posts', total=all_posts.__len__(),
@@ -70,7 +77,7 @@ def submit_post():
     user = current_user._get_current_object()
 
     if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
-        DB.create_blog_post(author_id=user.id, body=request.form['text_post'], post_time=datetime.datetime.now())
+        DB.create_blog_post(author_id=user.id, body=markdown(request.form['text_post'], output_format='html'), post_time=datetime.datetime.now())
 
     return redirect(url_for('home'))
 
