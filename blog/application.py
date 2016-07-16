@@ -61,7 +61,7 @@ def home(page):
     if page is 1:
         start_at = 0
     else:
-        start_at = (page * per_page) - 5
+        start_at = (page * per_page) - per_page
 
 
     all_posts = DB.get_all_posts()
@@ -70,6 +70,33 @@ def home(page):
                           format_total=True, css_framework='bootstrap3')
 
     return render_template("index.html", form=PostForm(), posts=posts, paginate=paginate)
+
+
+
+@application.route('/post/<int:id>')
+def permalink_post(id):
+    post = DB.get_post_id(id)
+
+    return render_template("post.html", posts=post)
+
+
+@application.route('/edit/<int:id>', methods=["GET", "POST"])
+@login_required
+def edit_post(id):
+    post = DB.get_post_id(id)
+    user = current_user._get_current_object()
+
+    if user.role != ROLE_ADMINISTRATOR or user.id != post[0]['author_id']:
+        abort(403)
+
+    form = PostForm()
+    if form.validate_on_submit:
+        post[0]['body'] = request.form['text_post']
+        DB.update_post(post)
+        return redirect(url_for('permalink_post', id=post[0]['posts_id']))
+
+    return render_template("edit_post.html", form=form, post=post)
+
 
 @application.route('/submit_blog_post', methods=["POST"])
 def submit_post():

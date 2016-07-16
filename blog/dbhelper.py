@@ -52,6 +52,17 @@ class DBHelper():
         finally:
             conn.close()
 
+    def update_post(self, post):
+        conn = self.connect()
+        try:
+            query = "UPDATE blog.posts SET body = %s WHERE posts_id = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (post[0]["body"], post[0]['posts_id']))
+                conn.commit()
+        finally:
+            conn.close()
+
+
     def insert_gravatar_hash(self, email, hash):
         conn = self.connect()
         try:
@@ -186,6 +197,18 @@ class DBHelper():
                 return cursor.fetchall()
         finally:
             con.close()
+
+    def get_post_id(self, id):
+        conn = self.connect()
+        try:
+            # query = "select * from blog.posts WHERE posts_id = %s"
+            query = "select users.name, posts.author_id, posts.body, posts.post_time, posts.posts_id " \
+                    "from blog.posts join users on posts.author_id = users.id WHERE posts_id = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(query, id)
+                return cursor.fetchall()
+        finally:
+            conn.close()
 
     def update_user_permissions(self, roles, email):
         conn = self.connect()

@@ -38,7 +38,25 @@
 
          <br />
          <br />
-         <hr />
+
+        <div class="post-footer">
+            <a href="{{ url_for('permalink_post', id=post['posts_id']) }}">
+                <span class="label label-default">Permalink</span>
+            </a>
+        {% if current_user.role == 3 %}
+            <a href="{{ url_for('edit_post', id=post['posts_id']) }}">
+                <span class="label label-default">Edit</span>
+            </a>
+
+        {% elif current_user.id == post['author_id'] %}
+            <a href="{{ url_for('edit_post', id=post['posts_id']) }}">
+                <span class="label label-default">Edit</span>
+            </a>
+        {% endif %}
+
+        </div>
+
+        <hr />
      {% endfor %}
 
     {% endblock %}
