@@ -182,7 +182,16 @@ class DBHelper():
                     "from blog.posts join users on posts.author_id = users.id ORDER BY post_time DESC LIMIT %s, %s;"
             with conn.cursor() as cursor:
                 cursor.execute(query, (start_at, per_page))
-                conn.commit()
+                return cursor.fetchall()
+        finally:
+            conn.close()
+
+    def get_limited_users(self, start_at, per_page):
+        conn = self.connect()
+        try:
+            query = "select * FROM blog.users ORDER BY registration_date DESC LIMIT %s, %s;"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (start_at, per_page))
                 return cursor.fetchall()
         finally:
             conn.close()

@@ -216,14 +216,27 @@ def create_user():
 
     return render_template("register.html", registrationform=form)
 
-@application.route('/admin')
+@application.route('/admin/', defaults={'page':1})
+@application.route('/admin/<int:page>')
 @login_required
-def admin_panel():
-    records = DB.get_all_users()
+def admin_panel(page):
+    all_records = DB.get_all_users()
     user = current_user._get_current_object()
     if user.role != ROLE_ADMINISTRATOR:
         abort(403)
-    return render_template("admin.html", records=records, form=User_EditForm())
+
+    per_page = 10
+    if page is 1:
+        start_at = 0
+    else:
+        start_at = (page * per_page) - per_page
+
+    records = DB.get_limited_users(start_at, per_page)
+
+    paginate = Pagination(page=page, per_page=per_page, record_name='records', total=all_records.__len__(),
+                          format_total=True, css_framework='bootstrap3')
+
+    return render_template("admin.html", records=records, form=User_EditForm(), paginate=paginate)
 
 @application.route('/admin/delete/<id>', methods=['GET', 'POST'])
 @login_required

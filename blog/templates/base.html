@@ -74,8 +74,12 @@
         <p class="lead blog-description">{% block blog_title_description %}The official example template of creating a blog with Bootstrap.{% endblock %}</p>
       </div>
 
+    {% if current_user.role == 3 %}
+
     {% block create_post %}
       {% endblock %}
+
+    {% endif %}
 
       <div class="row">
 
