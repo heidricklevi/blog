@@ -79,8 +79,15 @@ def permalink_post(id):
 
     return render_template("post.html", posts=post)
 
+@application.route('/change/<int:id>')
+@login_required
+def post_edit(id):
+    post = DB.get_post_id(id)
+    return render_template("edit_post.html", form=PostForm(), post=post)
 
-@application.route('/edit/<int:id>', methods=["GET", "POST"])
+
+
+@application.route('/edit/<int:id>', methods=["POST"])
 @login_required
 def edit_post(id):
     post = DB.get_post_id(id)
@@ -92,9 +99,9 @@ def edit_post(id):
     form = PostForm()
     if form.validate_on_submit:
         post[0]['body'] = request.form['text_post']
+        post[0]['post_title'] = form.title.data
         DB.update_post(post)
         return redirect(url_for('permalink_post', id=post[0]['posts_id']))
-
     return render_template("edit_post.html", form=form, post=post)
 
 
@@ -104,7 +111,8 @@ def submit_post():
     user = current_user._get_current_object()
 
     if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
-        DB.create_blog_post(author_id=user.id, body=markdown(request.form['text_post'], output_format='html'), post_time=datetime.datetime.now())
+        DB.create_blog_post(author_id=user.id, body=markdown(request.form['text_post'], output_format='html'),
+                            post_title=form.title.data, post_time=datetime.datetime.now())
 
     return redirect(url_for('home'))
 
