@@ -245,8 +245,6 @@ def delete_user(id):
     return redirect(url_for('admin_panel'))
 
 
-
-
 @application.route('/admin/update/<id>', methods=['POST'])
 @login_required
 def update_user(id):

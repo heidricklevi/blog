@@ -3,10 +3,19 @@
 {% block content %}
     <form class="form-horizontal" action="{{ url_for('edit_post', id=post[0]["posts_id"]) }}" method="post">
         {{ form.csrf_token }}
+
     <div class="form-group">
         <div class="col-sm-9">
-            <textarea name="text_post" data-provide="markdown"></textarea>
-                {{ form.body(class='.form-control') }}
+            {{ form.title(class='form-control', placeholder="Put your post title here...") }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-9">
+            <textarea name="text_post" id="text_post">Post content entered here and submitted will replace the previous post that is being edited</textarea>
+                <script>
+                    CKEDITOR.replaceAll();
+                </script>
 
         </div>
     </div>
@@ -19,7 +28,7 @@
     </form>
 
 
-        <h2 class="blog-post-title">First Run Through!</h2>
+        <h2 class="blog-post-title">{{ post[0]['post_title'] }}</h2>
          <p class="blog-post-meta">{{ post[0]['post_time'] }} <a href="{{ url_for('.user', name=post[0]['name']) }}">{{ post[0]['name'] }}</a> </p>
 
          {{ post[0]['body'] | safe }}

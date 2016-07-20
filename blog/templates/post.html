@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h2 class="blog-post-title">First Run Through!</h2>
+    <h2 class="blog-post-title">{{ posts[0]['post_title'] }}</h2>
     <p class="blog-post-meta">{{ posts[0]['post_time'] }} <a href="{{ url_for('.user', name=posts[0]['name']) }}">{{ posts[0]['name'] }}</a> </p>
 
         {{ posts[0]['body'] | safe }}
