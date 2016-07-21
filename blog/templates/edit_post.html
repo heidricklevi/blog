@@ -29,11 +29,14 @@
 
 
         <h2 class="blog-post-title">{{ post[0]['post_title'] }}</h2>
-         <p class="blog-post-meta">{{ post[0]['post_time'] }} <a href="{{ url_for('.user', name=post[0]['name']) }}">{{ post[0]['name'] }}</a> </p>
+         <p class="blog-post-meta">{{ post[0]['post_time'] }} <a href="{{ url_for('.user', username=post[0]['username']) }}">{{ post[0]['username'] }}</a> </p>
 
          {{ post[0]['body'] | safe }}
 
          <br />
          <br />
 
+{% endblock %}
+
+{% block paginate %}
 {% endblock %}

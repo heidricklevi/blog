@@ -145,15 +145,13 @@ def resend_confirmation():
 def account():
     return render_template("account.html")
 
-@application.route('/user/<name>')
-def user(name):
-    current = current_user._get_current_object()
-    # user = DB.get_user_data(current.email)
-    user = DB.get_user_by_name(name)
+@application.route('/user/<username>')
+def user(username):
+    user = DB.get_user_by_name(username)
     if user is None:
         abort(404)
 
-    user_one = User(user[0]['email'], user[0]['password'], user[0]['confirmed'], user[0]['roles_id'])
+    user_one = User(user[0]['email'], user[0]['username'], user[0]['password'], user[0]['confirmed'], user[0]['roles_id'])
     posts = DB.get_posts_by_user(user[0]["id"])
 
     return render_template("user.html", user=user, user_one=user_one, posts=posts)
@@ -207,9 +205,10 @@ def create_user():
     hashed = bcrypt.hashpw(str(form.password.data).encode(), bcrypt.gensalt())
 
     ROLE = ROLE_ADMINISTRATOR if form.email.data in config.administrators else ROLE_USER
-    DB.create_user(ROLE, form.name.data, form.email.data, datetime.datetime.now(), hashed,
+
+    DB.create_user(ROLE, form.username.data, form.name.data, form.email.data, datetime.datetime.now(), hashed,
                        datetime.datetime.now(), False)
-    user = User(form.email.data, hashed, False, ROLE)
+    user = User(form.email.data, username=form.username.data, password=hashed, confirmed=False, role=ROLE)
 
     token = User.generate_confirmation_token(user, expiration=3600)
     send_email(config.mail_username, config.mail_password, config.to_address, "test", user=user, token=token)
@@ -289,7 +288,8 @@ def login():
         stored_user = DB.get_user_login(form.email.data)
         hashed = str(stored_user[0]['password']).encode()
         if stored_user and bcrypt.hashpw(str(form.password.data).encode(), hashed) == hashed:
-            user = User(form.email.data, hashed, stored_user[0]['confirmed'], stored_user[0]['roles_id'])
+            user = User(form.email.data, username=stored_user[0]['username'], password=hashed,
+                        confirmed=stored_user[0]['confirmed'], role=stored_user[0]['roles_id'])
             login_user(user, remember=True)
             return render_template("login.html", loginform=form)
 
@@ -302,8 +302,8 @@ def load_user(user_id):
     user_password = str(stored_user[0]['password'].encode())
     if user_password:
 
-        return User(stored_user[0]['email'], user_password, stored_user[0]['confirmed'], stored_user[0]['roles_id'])
-
+        return User(stored_user[0]['email'], username=stored_user[0]['username'], password=user_password,
+                    confirmed=stored_user[0]['confirmed'], role=stored_user[0]['roles_id'])
 
 if __name__ == '__main__':
     application.debug = True

@@ -8,6 +8,7 @@ from wtforms.validators import Length
 
 class RegistrationForm(Form):
     name = TextField('name', validators=[validators.DataRequired()])
+    username = TextField('username', validators=[validators.data_required()])
     email = EmailField('email', validators=[validators.DataRequired(), validators.Email()])
     password = PasswordField('password', validators=[validators.DataRequired(), validators.Length(min=8, message="Password must be at least 8 chars")])
     password2 = PasswordField('password2', validators=[validators.DataRequired(), validators.EqualTo('password', message="passwords must match")])

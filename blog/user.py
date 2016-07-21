@@ -11,7 +11,7 @@ db = DBHelper()
 
 class User:
 
-    def __init__(self, email, password, confirmed, role):
+    def __init__(self, email, username, password, confirmed, role):
         self.modifified_date = db.get_modified_date_time(email)
         if self.modifified_date is None:
             self.modifified_date = datetime.datetime.now()
@@ -31,6 +31,7 @@ class User:
         self.password = password
         self.role = role
         self.confirmed = confirmed
+        self.username = username
 
     def ping(self):
         self.modifified_date = datetime.datetime.utcnow()
@@ -94,17 +95,17 @@ class User:
             role = 1
 
             name = forgery_py.internet.user_name()
+            username = forgery_py.internet.user_name()
             registration_date = forgery_py.date.date(True)
             modifified_date = forgery_py.date.date(False)
 
-            db.create_user(roles_id=role, name=name, email=email, registration_date=registration_date,
+            db.create_user(roles_id=role, username=username, name=name, email=email, registration_date=registration_date,
                            password=password, modified_at=modifified_date, confirmed=confirmed)
 
-            u = User(email=email, password=password, confirmed=confirmed, role=role)
+            u = User(email=email, username=username, password=password, confirmed=confirmed, role=role)
 
             u.about_me = forgery_py.lorem_ipsum.sentence()
             u.location = forgery_py.address.city()
-
 
             db.update_user_profile(u)
 
@@ -119,13 +120,15 @@ class User:
         for i in range(count):
             user = users[randint(0, users.__len__() - 1)]
             author_id = user['id']
-            body = forgery_py.lorem_ipsum.sentences(randint(1, 10))
+            post_title = forgery_py.lorem_ipsum.word()
+            body = forgery_py.lorem_ipsum.sentences(randint(1, 50))
             timestamp = forgery_py.date.date(True)
 
-            db.create_blog_post(author_id=author_id, body=body, post_time=timestamp)
+            db.create_blog_post(author_id=author_id, post_title=post_title, body=body, post_time=timestamp)
 
 
 class AnonymousUser(AnonymousUserMixin):
     def is_anonymous(self):
         return True
 
+User.generate_fake_posts(100)

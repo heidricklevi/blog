@@ -47,7 +47,7 @@
               {% if current_user.is_authenticated %}
               <li><a class="blog-nav-item" href="{{ url_for('logout') }}">Sign out</a> </li>
               <li><a class="blog-nav-item" href="{{ url_for('account') }}">Account</a></li>
-              <li><a class="blog-nav-item" href="{{ url_for('user', name=current_user.name) }}">Profile</a></li>
+              <li><a class="blog-nav-item" href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
                   {% if current_user.role == 3 %}
                       <li><a class="blog-nav-item" href="{{ url_for('admin_panel') }}">Admin</a></li>
                   {% endif %}

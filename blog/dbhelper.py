@@ -27,12 +27,12 @@ class DBHelper():
         finally:
             conn.close()
 
-    def get_user_by_name(self, name):  # temp until unique username is added to db
+    def get_user_by_name(self, username):
         conn = self.connect()
         try:
-            query = "SELECT * FROM blog.users WHERE name = %s;"
+            query = "SELECT * FROM blog.users WHERE username = %s;"
             with conn.cursor() as cursor:
-                cursor.execute(query, name)
+                cursor.execute(query, username)
                 return cursor.fetchall()
         finally:
             conn.close()
@@ -111,7 +111,7 @@ class DBHelper():
     def get_user_login(self, email):
         connection = self.connect()
         try:
-            query = "SELECT email, password, confirmed, roles_id FROM blog.users WHERE email = %(email)s"
+            query = "SELECT email, username, password, confirmed, roles_id FROM blog.users WHERE email = %(email)s"
             with connection.cursor() as cursor:
                 cursor.execute(query, {"email": email})
                 return cursor.fetchall()
@@ -130,12 +130,13 @@ class DBHelper():
         finally:
             connection.close()
 
-    def create_user(self, roles_id, name, email, registration_date, password, modified_at, confirmed):
+    def create_user(self, roles_id, username, name, email, registration_date, password, modified_at, confirmed):
         connection = self.connect()
         try:
-            query = "INSERT INTO users (roles_id, name, email, registration_date, password, modified_at, confirmed) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+            query = "INSERT INTO users (roles_id, username, name, email, registration_date," \
+                    " password, modified_at, confirmed) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (roles_id, name, email, registration_date, password, modified_at, confirmed))
+                cursor.execute(query, (roles_id, username, name, email, registration_date, password, modified_at, confirmed))
                 connection.commit()
         except Exception as e:
                 print(e)
@@ -178,8 +179,9 @@ class DBHelper():
     def get_limited_posts(self, start_at, per_page):
         conn = self.connect()
         try:
-            query = "select users.name, posts.author_id, posts.post_title, posts.body, posts.post_time, posts.posts_id " \
-                    "from blog.posts join users on posts.author_id = users.id ORDER BY post_time DESC LIMIT %s, %s;"
+            query = "select users.name, users.username, posts.author_id, posts.post_title, posts.body," \
+                    " posts.post_time, posts.posts_id from blog.posts" \
+                    " join users on posts.author_id = users.id ORDER BY post_time DESC LIMIT %s, %s;"
             with conn.cursor() as cursor:
                 cursor.execute(query, (start_at, per_page))
                 return cursor.fetchall()
@@ -199,7 +201,8 @@ class DBHelper():
     def get_all_posts(self):
         con = self.connect()
         try:
-            query = "select users.name, posts.author_id, posts.post_title, posts.body, posts.post_time, posts.posts_id " \
+            query = "select users.name, users.username, posts.author_id, posts.post_title," \
+                    " posts.body, posts.post_time, posts.posts_id " \
                     "from blog.posts join users on posts.author_id = users.id ORDER BY post_time;"
             with con.cursor() as cursor:
                 cursor.execute(query)
@@ -211,7 +214,8 @@ class DBHelper():
         conn = self.connect()
         try:
             # query = "select * from blog.posts WHERE posts_id = %s"
-            query = "select users.name, posts.author_id, posts.post_title, posts.body, posts.post_time, posts.posts_id " \
+            query = "select users.name, users.username," \
+                    " posts.author_id, posts.post_title, posts.body, posts.post_time, posts.posts_id " \
                     "from blog.posts join users on posts.author_id = users.id WHERE posts_id = %s"
             with conn.cursor() as cursor:
                 cursor.execute(query, id)
