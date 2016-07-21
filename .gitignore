@@ -2,5 +2,9 @@ dbconfig.py
 config.py
 config.cpython-35.pyc
 dbconfig.cpython-35.pyc
+dbhelper.cpython-35.pyc
+user.cpython-35.pyc
+forms.cpython-35.pyc
+workspace.xml
 ckeditor
 levi_heidrick.jpg
