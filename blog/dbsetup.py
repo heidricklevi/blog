@@ -44,6 +44,21 @@ try:
 
         cursor.execute(sql)
 
+        sql = """CREATE TABLE if NOT EXISTS blog.comments (
+
+              id int NOT NULL AUTO_INCREMENT,
+              body TEXT NOT NULL,
+              comment_time TIMESTAMP,
+              author_id int,
+              post_id int,
+              FOREIGN KEY (author_id) REFERENCES blog.users(id),
+              FOREIGN KEY (post_id) REFERENCES blog.posts(posts_id),
+              PRIMARY KEY (id)
+
+              )"""
+
+        cursor.execute(sql)
+
     connection.commit()
 finally:
     connection.close()

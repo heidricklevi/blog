@@ -153,6 +153,26 @@ class DBHelper():
         finally:
             conn.close()
 
+    def insert_comment(self, body, comment_time, author_id, post_id):
+        conn = self.connect()
+        try:
+            query = "INSERT INTO comments (body, comment_time, author_id, post_id) VALUES (%s, %s, %s, %s);"
+            with conn.cursor() as cursor:
+                cursor.execute(query, (body, comment_time, author_id, post_id))
+                conn.commit()
+        finally:
+            conn.close()
+
+    def get_all_comments(self, post_id):
+        conn = self.connect()
+        try:
+            query = "SELECT * FROM blog.comments WHERE post_id = %s ORDER BY comment_time ASC;"
+            with conn.cursor() as cursor:
+                cursor.execute(query, post_id)
+                return cursor.fetchall()
+        finally:
+            conn.close()
+
 
     def insert_roles(self, roles_id, permissions):
         conn = self.connect()

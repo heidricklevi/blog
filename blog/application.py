@@ -165,7 +165,7 @@ def edit_profile():
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
         DB.update_user_profile(current_user)
-        return redirect(url_for('.user', name=current_user.name))
+        return redirect(url_for('.user', username=current_user.username))
     form.name.data = current_user.name
     form.location.data = current_user.location
     form.about_me.data = current_user.about_me
@@ -231,10 +231,9 @@ def admin_panel(page):
         start_at = (page * per_page) - per_page
 
     records = DB.get_limited_users(start_at, per_page)
-
     paginate = Pagination(page=page, per_page=per_page, record_name='records', total=all_records.__len__(),
                           format_total=True, css_framework='bootstrap3')
-
+    
     return render_template("admin.html", records=records, form=User_EditForm(), paginate=paginate)
 
 @application.route('/admin/delete/<id>', methods=['GET', 'POST'])

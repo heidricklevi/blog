@@ -130,5 +130,3 @@ class User:
 class AnonymousUser(AnonymousUserMixin):
     def is_anonymous(self):
         return True
-
-User.generate_fake_posts(100)
