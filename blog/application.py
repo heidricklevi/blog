@@ -1,21 +1,22 @@
 import datetime
+import bcrypt
+import config
+import smtplib
 from flask import Flask, session, render_template, request, flash, redirect, url_for, abort
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
-from flask.ext.moment import Moment
 from dbhelper import DBHelper
-import config
 from flask.ext.moment import Moment
 from user import User, AnonymousUser
 from markdown import markdown
-import bcrypt
 from flask.ext.paginate import Pagination
-from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm
+from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm, CommentForm
 from flask_mail import Mail
-from flask.ext.mail import Message
-import smtplib
+
 
 application = Flask(__name__)
 application.secret_key = config.app_key_auth
+application.jinja_env.add_extension("jinja2.ext.do")
+application.jinja_env.add_extension("jinja2.ext.loopcontrols")
 login_manager = LoginManager(application)
 DB = DBHelper()
 moment = Moment(application)
@@ -65,19 +66,33 @@ def home(page):
 
 
     all_posts = DB.get_all_posts()
+    comments = DB.get_comments()
     posts = DB.get_limited_posts(start_at=start_at, per_page=per_page)
     paginate = Pagination(page=page, per_page=per_page, record_name='posts', total=all_posts.__len__(),
                           format_total=True, css_framework='bootstrap3')
 
-    return render_template("index.html", form=PostForm(), posts=posts, paginate=paginate)
-
+    return render_template("index.html", form=PostForm(), posts=posts, paginate=paginate, comments=comments)
 
 
 @application.route('/post/<int:id>')
 def permalink_post(id):
     post = DB.get_post_id(id)
+    comments = DB.get_comments_by_author(id)
+    return render_template("post.html", comments=comments, posts=post, form=CommentForm())
 
-    return render_template("post.html", posts=post)
+
+@application.route('/comment/<int:id>', methods=['POST'])
+@login_required
+def post_comment(id):
+    form = CommentForm()
+    user = current_user._get_current_object()
+
+    if form.validate_on_submit:
+        DB.insert_comment(form.body.data, datetime.datetime.utcnow(), user.id, id)
+        return redirect(url_for('permalink_post', id=id))
+    return url_for('permalink_post', id=id)
+
+
 
 @application.route('/change/<int:id>')
 @login_required
@@ -122,12 +137,6 @@ def before_request():
     if current_user.is_authenticated:
         current_user.ping()
 
-#
-# @application.route('/unconfirmed')
-# def unconfirmed():
-#     if current_user.is_anonymous or current_user.confirmed:
-#         return redirect('home')
-#     return render_template('unconfirmed.html')
 
 @application.route('/confirm')
 @login_required

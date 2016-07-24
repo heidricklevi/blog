@@ -163,7 +163,7 @@ class DBHelper():
         finally:
             conn.close()
 
-    def get_all_comments(self, post_id):
+    def get_comments_by_author(self, post_id):
         conn = self.connect()
         try:
             query = "SELECT * FROM blog.comments WHERE post_id = %s ORDER BY comment_time ASC;"
@@ -173,6 +173,15 @@ class DBHelper():
         finally:
             conn.close()
 
+    def get_comments(self):
+        con = self.connect()
+        try:
+            query = "SELECT * FROM blog.comments ORDER BY comment_time ASC;"
+            with con.cursor() as cursor:
+                cursor.execute(query)
+                return cursor.fetchall()
+        finally:
+            con.close()
 
     def insert_roles(self, roles_id, permissions):
         conn = self.connect()

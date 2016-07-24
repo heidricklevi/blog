@@ -38,3 +38,7 @@ class PostForm(Form):
     body = HiddenField("Type Blog content here.", validators=[validators.DataRequired()])
     title = TextField("Put your Blog post title here...", validators=[validators.DataRequired()])
     submit = SubmitField("Submit")
+
+class CommentForm(Form):
+    body = TextAreaField("Type your comment here...", validators=[validators.DataRequired()])
+    submit = SubmitField("Submit")

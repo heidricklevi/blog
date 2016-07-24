@@ -12,3 +12,30 @@
     <hr />
 
 {% endblock %}
+
+{% block display_comments %}
+    {% for comment in comments %}
+    <h4>Comment submitted {{ comment['comment_time'] }}</h4>
+        <p>{{ comment['body']  }}</p>
+    {% endfor %}
+{% endblock %}
+
+{% block comments %}
+    <form class="form-horizontal" action="{{ url_for('post_comment', id=posts[0]['posts_id']) }}" method="post">
+    <h4>Enter your comment below</h4>
+        <div class="form-group">
+            <div class="col-sm-9">
+                {{ form.body(class='form-control') }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-9">
+                {{ form.submit(class='btn btn-primary') }}
+            </div>
+        </div>
+
+    </form>
+
+
+{% endblock %}
