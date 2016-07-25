@@ -47,6 +47,13 @@
                         <div class="post-body">
                             {{ post['body'] }}
                         </div>
+                        <div class="post-footer">
+                            <a href="{{ url_for("permalink_post", id=post["posts_id"]) }}">
+                                <span class="label label-primary">Permalink</span></a>&nbsp;
+
+                            <a href="{{ url_for("permalink_post", id=post["posts_id"]) }}#comments">
+                                <span class="label label-primary">{{ post["comment_count"] }} Comments</span></a>
+                        </div>
                     </div>
                 </li>
 

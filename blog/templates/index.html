@@ -56,11 +56,8 @@
                 <span class="label label-default">Permalink</span></a>
             &nbsp;
 
-
             <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
-               <span class="label label-primary">{{ comments|count }} Comments</span></a>&nbsp;
-
-
+                <span class="label label-primary">{{ post['comment_count'] }} Comments</span></a>&nbsp;
 
         {% if current_user.role == 3 %}
             <a href="{{ url_for('post_edit', id=post['posts_id']) }}">

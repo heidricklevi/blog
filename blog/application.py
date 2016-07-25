@@ -78,6 +78,7 @@ def home(page):
 def permalink_post(id):
     post = DB.get_post_id(id)
     comments = DB.get_comments_by_author(id)
+    DB.update_comment(len(comments), id)
     return render_template("post.html", comments=comments, posts=post, form=CommentForm())
 
 
@@ -89,6 +90,8 @@ def post_comment(id):
 
     if form.validate_on_submit:
         DB.insert_comment(form.body.data, datetime.datetime.utcnow(), user.id, id)
+        comments = DB.get_comments_by_author(id)
+        DB.update_comment(len(comments), id)
         return redirect(url_for('permalink_post', id=id))
     return url_for('permalink_post', id=id)
 

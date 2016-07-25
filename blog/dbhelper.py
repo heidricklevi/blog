@@ -143,12 +143,12 @@ class DBHelper():
         finally:
             connection.close()
 
-    def create_blog_post(self, author_id, post_title, body, post_time):
+    def create_blog_post(self, author_id, post_title, body, post_time, modified_time):
         conn = self.connect()
         try:
-            query = "INSERT INTO posts (author_id, post_title, body, post_time) VALUES (%s, %s, %s, %s);"
+            query = "INSERT INTO posts (author_id, post_title, body, post_time, modified_time) VALUES (%s, %s, %s, %s, %s);"
             with conn.cursor() as cursor:
-                cursor.execute(query, (author_id, post_title, body, post_time))
+                cursor.execute(query, (author_id, post_title, body, post_time, modified_time))
                 conn.commit()
         finally:
             conn.close()
@@ -194,6 +194,17 @@ class DBHelper():
         finally:
           conn.close()
 
+    def update_comment(self, new_comment_amount, posts_id):
+        conn = self.connect()
+
+        try:
+                query = "UPDATE blog.posts SET comment_count = %s WHERE posts_id = %s"
+                with conn.cursor() as cursor:
+                    cursor.execute(query, (new_comment_amount, posts_id))
+                    conn.commit()
+        finally:
+          conn.close()
+
     def get_posts_by_user(self, id):
         conn = self.connect()
         try:
@@ -209,7 +220,7 @@ class DBHelper():
         conn = self.connect()
         try:
             query = "select users.name, users.username, posts.author_id, posts.post_title, posts.body," \
-                    " posts.post_time, posts.posts_id from blog.posts" \
+                    " posts.post_time, posts.comment_count, posts.posts_id from blog.posts" \
                     " join users on posts.author_id = users.id ORDER BY post_time DESC LIMIT %s, %s;"
             with conn.cursor() as cursor:
                 cursor.execute(query, (start_at, per_page))
@@ -231,7 +242,7 @@ class DBHelper():
         con = self.connect()
         try:
             query = "select users.name, users.username, posts.author_id, posts.post_title," \
-                    " posts.body, posts.post_time, posts.posts_id " \
+                    " posts.body, posts.comment_count, posts.post_time, posts.posts_id " \
                     "from blog.posts join users on posts.author_id = users.id ORDER BY post_time;"
             with con.cursor() as cursor:
                 cursor.execute(query)
@@ -244,7 +255,7 @@ class DBHelper():
         try:
             # query = "select * from blog.posts WHERE posts_id = %s"
             query = "select users.name, users.username," \
-                    " posts.author_id, posts.post_title, posts.body, posts.post_time, posts.posts_id " \
+                    " posts.author_id, posts.post_title, posts.comment_count, posts.body, posts.post_time, posts.posts_id " \
                     "from blog.posts join users on posts.author_id = users.id WHERE posts_id = %s"
             with conn.cursor() as cursor:
                 cursor.execute(query, id)
