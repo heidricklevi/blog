@@ -1,0 +1,65 @@
+.avatar .user {
+    position: relative;
+    z-index: 100;
+    background: #dbdfe4;
+    padding: 0;
+}
+
+.avatar .user, .avatar img {
+    border-radius: 3px;
+    display: block;
+    position: absolute;
+}
+
+.comment_body {
+
+    margin: auto;
+    border-color: #8c8c8c;
+    width: 90%;
+    height: 50px;
+    font-family: Helvetica, Arial, sans-serif;
+    position: relative;
+    border-radius: 5px;
+    resize: none;
+
+}
+
+.use-opacity-transitions .postbox .post-actions {
+    transition: opacity linear .2s;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    transition-delay: initial;
+}
+.expanded .postbox .post-actions {
+    visibility: visible;
+}
+.auth-section .proceed.active, .expanded .postbox .post-actions {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.post-actions {
+    visibility: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    background: #f6f8f9;
+    border-radius: 0 0 2px 2px;
+    border-top: solid 2px;
+    border-color: #dbdfe4;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+}
+
+.postbox .post-actions {
+    transition: opacity linear .2s;
+}
+.expanded .postbox .post-actions {
+    visibility: visible;
+}
+.auth-section .proceed.active, .expanded .postbox .post-actions {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}

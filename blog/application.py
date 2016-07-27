@@ -77,9 +77,10 @@ def home(page):
 @application.route('/post/<int:id>')
 def permalink_post(id):
     post = DB.get_post_id(id)
+    user = current_user._get_current_object()
     comments = DB.get_comments_by_author(id)
     DB.update_comment(len(comments), id)
-    return render_template("post.html", comments=comments, posts=post, form=CommentForm())
+    return render_template("post.html", user=user, comments=comments, posts=post, form=CommentForm())
 
 
 @application.route('/comment/<int:id>', methods=['POST'])
@@ -89,11 +90,11 @@ def post_comment(id):
     user = current_user._get_current_object()
 
     if form.validate_on_submit:
-        DB.insert_comment(form.body.data, datetime.datetime.utcnow(), user.id, id)
+        DB.insert_comment(form.body.data, datetime.datetime.utcnow(), user.id, id, False)
         comments = DB.get_comments_by_author(id)
         DB.update_comment(len(comments), id)
-        return redirect(url_for('permalink_post', id=id))
-    return url_for('permalink_post', id=id)
+        return redirect(url_for('permalink_post', id=id, user=user))
+    return url_for('permalink_post', id=id, user=user)
 
 
 

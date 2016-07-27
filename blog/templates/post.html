@@ -36,7 +36,42 @@
         </div>
 
     </form>
+<!---------------------------------------------------------------------->
+    <div class="comments">
+        <div class="avatar">
+            <img data-role="user-avatar" src="{{ user.gravatar(size=50) }}" class="user">
+        </div>
 
+        <div class="comment-body" style="position: relative; left: 60px; right: 0; top: 0; ">
+            <textarea class="comment_body" id="comment_body" name="comment_body" placeholder="Join the Discussion..."></textarea>
+            <div class="post-actions">
+                <section>
+                    <div class="temp-post" style="text-align: right">
+                        <button class="btn">
+                            <span class="label-default">{{ user.username }}</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+    </div>
+
+<!---------------------------------------------------------------------->
+<div id="disqus_thread"></div>
+
+<script>
+
+(function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//heidritech.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 {% endblock %}
 

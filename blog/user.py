@@ -4,8 +4,6 @@ from flask.ext.login import AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request
 from dbhelper import DBHelper
-import config
-import os, shutil
 
 db = DBHelper()
 

@@ -153,12 +153,12 @@ class DBHelper():
         finally:
             conn.close()
 
-    def insert_comment(self, body, comment_time, author_id, post_id):
+    def insert_comment(self, body, comment_time, author_id, post_id, disabled):
         conn = self.connect()
         try:
-            query = "INSERT INTO comments (body, comment_time, author_id, post_id) VALUES (%s, %s, %s, %s);"
+            query = "INSERT INTO comments (body, comment_time, author_id, post_id, disabled) VALUES (%s, %s, %s, %s, %s);"
             with conn.cursor() as cursor:
-                cursor.execute(query, (body, comment_time, author_id, post_id))
+                cursor.execute(query, (body, comment_time, author_id, post_id, disabled))
                 conn.commit()
         finally:
             conn.close()
