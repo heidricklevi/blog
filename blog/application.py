@@ -90,7 +90,7 @@ def post_comment(id):
     user = current_user._get_current_object()
 
     if form.validate_on_submit:
-        DB.insert_comment(form.body.data, datetime.datetime.utcnow(), user.id, id, False)
+        DB.insert_comment(request.form['comment_body'], datetime.datetime.utcnow(), user.id, id, False)
         comments = DB.get_comments_by_author(id)
         DB.update_comment(len(comments), id)
         return redirect(url_for('permalink_post', id=id, user=user))
@@ -131,7 +131,7 @@ def submit_post():
 
     if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
         DB.create_blog_post(author_id=user.id, body=markdown(request.form['text_post'], output_format='html'),
-                            post_title=form.title.data, post_time=datetime.datetime.now())
+                            post_title=form.title.data, post_time=datetime.datetime.now(), modified_time=datetime.datetime.utcnow())
 
     return redirect(url_for('home'))
 

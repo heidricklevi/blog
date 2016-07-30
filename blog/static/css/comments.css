@@ -1,11 +1,12 @@
-.avatar .user {
+.user {
     position: relative;
     z-index: 100;
     background: #dbdfe4;
     padding: 0;
+    border-radius: 3px;
 }
 
-.avatar .user, .avatar img {
+.comment-img .user, .avatar img {
     border-radius: 3px;
     display: block;
     position: absolute;
@@ -13,7 +14,7 @@
 
 .comment_body {
 
-    margin: auto;
+    overflow: auto;
     border-color: #8c8c8c;
     width: 90%;
     height: 50px;
@@ -21,45 +22,85 @@
     position: relative;
     border-radius: 5px;
     resize: none;
+    max-height: 350px;
 
 }
 
-.use-opacity-transitions .postbox .post-actions {
-    transition: opacity linear .2s;
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: linear;
-    transition-delay: initial;
-}
-.expanded .postbox .post-actions {
-    visibility: visible;
-}
-.auth-section .proceed.active, .expanded .postbox .post-actions {
-    opacity: 1;
-    filter: alpha(opacity=100);
-}
-.post-actions {
-    visibility: hidden;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    background: #f6f8f9;
-    border-radius: 0 0 2px 2px;
-    border-top: solid 2px;
-    border-color: #dbdfe4;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.post-comment {
+
+    outline-color: #8c8c8c;
+    width: 90%;
     height: 36px;
+    opacity: 1;
+    border: 2px black;
+
 }
 
-.postbox .post-actions {
-    transition: opacity linear .2s;
+.nav-primary {
+    margin: 0 0 24px;
+    border-bottom: 2px solid #e7e9ee;
 }
-.expanded .postbox .post-actions {
-    visibility: visible;
+
+.ul {
+    list-style: none;
+    padding-left: 0;
 }
-.auth-section .proceed.active, .expanded .postbox .post-actions {
-    opacity: 1;
-    filter: alpha(opacity=100);
+
+.nav-tab-primary {
+
+    float: right;
+}
+
+
+.nav-comment-count {
+    position: absolute;
+    left: 15px;
+}
+
+.comments {
+
+    position: relative;
+    margin: 0 0 24px;
+
+}
+
+.posted-comment {
+    position: relative;
+    left: 0;
+    padding: 10px;
+    margin: auto;
+}
+
+.comment__header {
+    line-height: 1;
+    font-size: 13px;
+    margin-bottom: 3px;
+    position: relative;
+}
+
+.comment__header .author {
+    color: #656c7a;
+
+}
+
+.pub-color {
+    color: #337ab7;
+    border: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+
+.post-list {
+    margin-bottom: 24px;
+    max-height: 400px;
+    height: 75px;
+}
+
+.comment-img {
+    margin-right: 12px;
+    float: left;
 }

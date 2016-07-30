@@ -41,4 +41,4 @@ class PostForm(Form):
 
 class CommentForm(Form):
     body = TextAreaField("Type your comment here...", validators=[validators.DataRequired()])
-    submit = SubmitField("Submit")
+    submit = SubmitField("Post Comment")

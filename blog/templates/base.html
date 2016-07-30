@@ -21,7 +21,6 @@
     <link href="../static/css/blog.css" rel="stylesheet">
 
     <link href="../static/css/comments.css" rel="stylesheet">
-
     <link href="../static/css/bootstrap-markdown.min.css" rel="stylesheet">
 
     <script src="../static/ckeditor/ckeditor.js"></script>
@@ -93,15 +92,12 @@
             {% block content %}
               {% endblock %}
           </div><!-- /.blog-post -->
+            {% block comments %}
+            {% endblock %}
+
             {% block display_comments %}
             {% endblock %}
 
-            <br />
-            <br />
-            <br />
-
-            {% block comments %}
-            {% endblock %}
 
           <nav>
               {% block paginate %}
