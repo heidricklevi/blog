@@ -29,7 +29,15 @@
                         <span class="post-byline">
                             <span class="author pub-color"><a href="{{ url_for('.user', username=user.username) }}">{{ user.username  }}</a></span>
                         </span>
+                        - {{ moment(comment['comment_time']).fromNow() }}
                      </header>
+                    <div class="comment-display-body">
+                      <div>
+                        <div class="comment-inner" style="margin-left: 9%; overflow-x: hidden; width: 91%; position: absolute; zoom: 1">
+                            {{ comment['body'] }}
+                        </div>
+                      </div>
+                    </div>
                 </li>
             </ul>
         </div>

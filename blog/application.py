@@ -27,7 +27,6 @@ ROLE_MODERATOR = 2
 ROLE_ADMINISTRATOR = 3
 
 
-
 def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
 
     gmail_user = user_fromaddress
@@ -52,8 +51,6 @@ def send_email(user_fromaddress, pwd, recipient, subject, **kwargs ):
         print("failed to send mail")
 
 
-
-
 @application.route('/', defaults={'page':1})
 @application.route('/page/<int:page>')
 def home(page):
@@ -63,7 +60,6 @@ def home(page):
         start_at = 0
     else:
         start_at = (page * per_page) - per_page
-
 
     all_posts = DB.get_all_posts()
     comments = DB.get_comments()
@@ -97,13 +93,11 @@ def post_comment(id):
     return url_for('permalink_post', id=id, user=user)
 
 
-
 @application.route('/change/<int:id>')
 @login_required
 def post_edit(id):
     post = DB.get_post_id(id)
     return render_template("edit_post.html", form=PostForm(), post=post)
-
 
 
 @application.route('/edit/<int:id>', methods=["POST"])
@@ -131,7 +125,7 @@ def submit_post():
 
     if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
         DB.create_blog_post(author_id=user.id, body=markdown(request.form['text_post'], output_format='html'),
-                            post_title=form.title.data, post_time=datetime.datetime.now(), modified_time=datetime.datetime.utcnow())
+                            post_title=form.title.data, post_time=datetime.datetime.now(), modified_time=datetime.datetime.now())
 
     return redirect(url_for('home'))
 
@@ -153,10 +147,12 @@ def resend_confirmation():
     send_email(config.from_address, config.mail_password, config.to_address, "Confirmation Email", user=user, token=token)
     return redirect(url_for('home'))
 
+
 @application.route('/account')
 @login_required
 def account():
     return render_template("account.html")
+
 
 @application.route('/user/<username>')
 def user(username):
@@ -168,6 +164,7 @@ def user(username):
     posts = DB.get_posts_by_user(user[0]["id"])
 
     return render_template("user.html", user=user, user_one=user_one, posts=posts)
+
 
 @application.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -183,7 +180,6 @@ def edit_profile():
     form.location.data = current_user.location
     form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', form=form)
-
 
 
 @application.route('/confirm/<token>')
@@ -202,9 +198,11 @@ def confirm(token):
         flash("Confirmation link invalid or expired.")
     return redirect(url_for('login'))
 
+
 @application.route('/register', methods=['GET'])
 def register():
     return render_template("register.html", registrationform=RegistrationForm())
+
 
 @application.route('/register/createaccount', methods=['POST'])
 def create_user():
@@ -228,6 +226,7 @@ def create_user():
 
     return render_template("register.html", registrationform=form)
 
+
 @application.route('/admin/', defaults={'page':1})
 @application.route('/admin/<int:page>')
 @login_required
@@ -248,6 +247,7 @@ def admin_panel(page):
                           format_total=True, css_framework='bootstrap3')
     
     return render_template("admin.html", records=records, form=User_EditForm(), paginate=paginate)
+
 
 @application.route('/admin/delete/<id>', methods=['GET', 'POST'])
 @login_required
@@ -281,6 +281,7 @@ def update_user(id):
     form.name.data = user[0]['name']
     return render_template("admin.html", user=user, form=form)
 
+
 @application.route("/logout")
 @login_required
 def logout():
@@ -292,6 +293,7 @@ def logout():
 @application.route('/login')
 def login_page():
     return render_template('login.html', loginform=LoginForm())
+
 
 @application.route('/login/verify', methods=['POST'])
 def login():
@@ -307,6 +309,7 @@ def login():
 
         form.email.errors.append("Email or Password is invalid")
     return render_template("login.html", loginform=form)
+
 
 @login_manager.user_loader
 def load_user(user_id):
