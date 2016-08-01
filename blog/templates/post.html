@@ -17,14 +17,14 @@
 
     {% for comment in comments %}
        <div class="post-list">
-            <ul style="list-style: none; padding-left: 0">
+            <ul style="list-style: none; padding-left: 0;">
                 <li style="float: left">
                     <div class="posted-comment" style="padding-left: 0; border-radius: 3px; display: inline; padding-bottom: 24px ">
                         <img src="{{ user.gravatar(size=50) }}" class="user">
                     </div>
                 </li>
 
-                <li>
+                <li style="margin-bottom: auto; ">
                      <header style="line-height: 1; font-size: 13px">
                         <span class="post-byline">
                             <span class="author pub-color"><a href="{{ url_for('.user', username=user.username) }}">{{ user.username  }}</a></span>
@@ -32,9 +32,9 @@
                         - {{ moment(comment['comment_time']).fromNow() }}
                      </header>
                     <div class="comment-display-body">
-                      <div>
-                        <div class="comment-inner" style="margin-left: 9%; overflow-x: hidden; width: 91%; position: absolute; zoom: 1">
-                            {{ comment['body'] }}
+                      <div style="position: relative; top: -40px; left: 4px">
+                        <div class="comment-inner" style="margin-left: 9%; overflow-x: hidden; overflow-wrap: break-word; width: 91%; height: auto; position: relative; zoom: 1">
+                            <p style="margin-bottom: auto">{{ comment['body'] }}</p>
                         </div>
                       </div>
                     </div>
@@ -55,7 +55,7 @@
                     <span>{{ user.username }}</span>
                 </li>
                 <li class="nav-tab nav-comment-count">
-                    <span class="tab-content">{{ posts[0]['comment_count'] }} Comments</span>
+                    <span class="tab-content" style="font-weight: 700; font-size: 22px; font-family:Helvetica Neue, Helvetica, Arial, sans-serif">{{ posts[0]['comment_count'] }} Comments</span>
                 </li>
             </ul>
         </nav>

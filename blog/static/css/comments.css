@@ -96,11 +96,20 @@
 
 .post-list {
     margin-bottom: 24px;
-    max-height: 400px;
-    height: 75px;
+    height: auto;
 }
 
 .comment-img {
     margin-right: 12px;
     float: left;
 }
+
+.comment-display-body {
+    transition:height 0.5s;
+    -webkit-transition:height 0.5s;
+}
+
+/*.comment-display-body:hover {*/
+
+    /*height: 200px;*/
+/*}*/
