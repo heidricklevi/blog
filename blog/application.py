@@ -89,8 +89,8 @@ def post_comment(id):
         DB.insert_comment(request.form['comment_body'], datetime.datetime.utcnow(), user.id, id, False)
         comments = DB.get_comments_by_author(id)
         DB.update_comment(len(comments), id)
-        return redirect(url_for('permalink_post', id=id, user=user))
-    return url_for('permalink_post', id=id, user=user)
+        return redirect(url_for('permalink_post', id=id))
+    return url_for('permalink_post', id=id)
 
 
 @application.route('/change/<int:id>')

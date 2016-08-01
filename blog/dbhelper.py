@@ -166,7 +166,10 @@ class DBHelper():
     def get_comments_by_author(self, post_id):
         conn = self.connect()
         try:
-            query = "SELECT * FROM blog.comments WHERE post_id = %s ORDER BY comment_time ASC;"
+            query = """select users.username, users.gravatar_hash, users.confirmed, users.roles_id, users.email,
+                       comments.body, comments.comment_time, comments.disabled, comments.post_id
+                       from blog.comments join users on comments.author_id = users.id
+                       WHERE post_id = %s ORDER BY comment_time ASC;"""
             with conn.cursor() as cursor:
                 cursor.execute(query, post_id)
                 return cursor.fetchall()

@@ -48,13 +48,17 @@
 
 .nav-tab-primary {
 
+    margin-bottom: 5px;
+    position: relative;
     float: right;
 }
 
 
 .nav-comment-count {
-    position: absolute;
-    left: 15px;
+    margin-bottom: 5px;
+    position: relative;
+    float: left;
+    left: -6%;
 }
 
 .comments {
@@ -62,6 +66,12 @@
     position: relative;
     margin: 0 0 24px;
 
+}
+
+.comment-header {
+
+    display: inline-block;
+    position: absolute;
 }
 
 .posted-comment {
@@ -113,3 +123,11 @@
 
     /*height: 200px;*/
 /*}*/
+
+.tab-content {
+
+    font-weight: 700;
+    font-size: 22px;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+
+}
