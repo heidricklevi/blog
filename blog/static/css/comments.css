@@ -94,12 +94,12 @@
 }
 
 .pub-color {
-    color: #337ab7;
+    color: #428bca;
     border: 0;
     padding: 0;
     line-height: 1;
     font-weight: 600;
-    font-family: inherit;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 100%;
 }
 
@@ -129,5 +129,16 @@
     font-weight: 700;
     font-size: 22px;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
 
+.comment-inner {
+
+    margin-left: 9%;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    width: 91%;
+    height: auto;
+    position: relative;
+    zoom: 1;
+    padding-top: 5px;
 }

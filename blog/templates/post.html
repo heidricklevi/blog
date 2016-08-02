@@ -19,21 +19,29 @@
        <div class="post-list">
             <ul style="list-style: none; padding-left: 0;">
                 <li style="float: left">
-                    <div class="posted-comment" style="padding-left: 0; border-radius: 3px; display: inline; padding-bottom: 24px ">
+                    <div class="posted-comment" style="padding-left: 0; border-radius: 3px; display: inline; padding-bottom: 24px "><a href="{{ url_for('.user', username=comment['username']) }}">
                         <img src="https://secure.gravatar.com/avatar/{{ comment['gravatar_hash'] }}?s=50&d=identicon&r=g" class="user">
+                    </a>
                     </div>
                 </li>
 
                 <li style="margin-bottom: auto; ">
                      <header class="comment-header" style="line-height: 1; font-size: 13px">
                         <span class="post-byline">
-                            <span class="author pub-color"><a href="{{ url_for('.user', username=comment['username']) }}">{{ comment['username'] }}</a></span>
+                            <span class="author pub-color">{{ comment['username'] }}</span>
                         </span>
+                         <style scoped>
+                            span {
+                                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                                font-weight: 700;
+
+                            }
+                         </style>
                         - {{ moment(comment['comment_time']).fromNow() }}
                      </header>
                     <div class="comment-display-body">
                       <div style="position: relative; top: -40px; left: 4px">
-                        <div class="comment-inner" style="margin-left: 9%; overflow-x: hidden; overflow-wrap: break-word; width: 91%; height: auto; position: relative; zoom: 1">
+                        <div class="comment-inner" style="">
                             <p style="margin-bottom: auto">{{ comment['body'] }}</p>
                         </div>
                       </div>
@@ -80,44 +88,9 @@
             </div>
         </form>
 
-{##}
-{#        <ul id="post-list" class="post-list">#}
-{#            {% for comment in comments %}#}
-{#                <li class="post">#}
-{#                    <div class="post-content author-session-user">#}
-{#                        <div class="comment-img" >#}
-{#                            <img src="{{ user.gravatar(size=48) }}" class="user">#}
-{#                        </div>#}
-{##}
-{#                            <div class="post-commentbody">#}
-{#                                <header class="comment__header">#}
-{#                                    <span class="post-byline">#}
-{#                                        <span class="author pub-color">{{ user.username  }}</span>#}
-{#                                    </span>#}
-{#                                </header>#}
-{#                            </div>#}
-{#                    </div>#}
-{#                </li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-
-
     </div>
 <!---------------------------------------------------------------------->
-{#<div id="disqus_thread"></div>#}
-{##}
-{#<script>#}
-{##}
-{#(function() { // DON'T EDIT BELOW THIS LINE#}
-{#        var d = document, s = d.createElement('script');#}
-{#        s.src = '//heidritech.disqus.com/embed.js';#}
-{#        s.setAttribute('data-timestamp', +new Date());#}
-{#        (d.head || d.body).appendChild(s);#}
-{#    })();#}
-{##}
-{#</script>#}
-{##}
-{#<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>#}
+
 
 {% endblock %}
 
