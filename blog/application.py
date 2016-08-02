@@ -100,6 +100,15 @@ def post_edit(id):
     return render_template("edit_post.html", form=PostForm(), post=post)
 
 
+@application.route('/comment/<int:id>/post/<int:post_id>')
+@login_required
+def comment_disable(id, post_id):
+    comment = DB.get_comments_by_id(id)
+    is_disabled = True if comment[0]['is_disabled'] == False else False
+    DB.mod_comment(is_disabled, id)
+    return redirect(url_for('permalink_post', id=post_id))
+
+
 @application.route('/edit/<int:id>', methods=["POST"])
 @login_required
 def edit_post(id):

@@ -153,12 +153,12 @@ class DBHelper():
         finally:
             conn.close()
 
-    def insert_comment(self, body, comment_time, author_id, post_id, disabled):
+    def insert_comment(self, body, comment_time, author_id, post_id, is_disabled):
         conn = self.connect()
         try:
-            query = "INSERT INTO comments (body, comment_time, author_id, post_id, disabled) VALUES (%s, %s, %s, %s, %s);"
+            query = "INSERT INTO comments (body, comment_time, author_id, post_id, is_disabled) VALUES (%s, %s, %s, %s, %s);"
             with conn.cursor() as cursor:
-                cursor.execute(query, (body, comment_time, author_id, post_id, disabled))
+                cursor.execute(query, (body, comment_time, author_id, post_id, is_disabled))
                 conn.commit()
         finally:
             conn.close()
@@ -167,7 +167,7 @@ class DBHelper():
         conn = self.connect()
         try:
             query = """select users.username, users.gravatar_hash, users.confirmed, users.roles_id, users.email,
-                       comments.body, comments.comment_time, comments.disabled, comments.post_id
+                       comments.body, comments.id, comments.comment_time, comments.is_disabled, comments.post_id
                        from blog.comments join users on comments.author_id = users.id
                        WHERE post_id = %s ORDER BY comment_time ASC;"""
             with conn.cursor() as cursor:
@@ -196,6 +196,29 @@ class DBHelper():
                     conn.commit()
         finally:
           conn.close()
+
+    def mod_comment(self, comment_mod, id):
+        conn = self.connect()
+
+        try:
+                query = "UPDATE blog.comments SET is_disabled = %s WHERE id = %s"
+                with conn.cursor() as cursor:
+                    cursor.execute(query, (comment_mod, id))
+                    conn.commit()
+        finally:
+          conn.close()
+
+    def get_comments_by_id(self, id):
+        conn = self.connect()
+
+        try:
+                query = "SELECT * FROM blog.comments WHERE id = %s"
+                with conn.cursor() as cursor:
+                    cursor.execute(query, id)
+                    return cursor.fetchall()
+        finally:
+          conn.close()
+
 
     def update_comment(self, new_comment_amount, posts_id):
         conn = self.connect()

@@ -142,3 +142,10 @@
     zoom: 1;
     padding-top: 5px;
 }
+
+.comment-footer {
+
+    position: absolute;
+    margin-top: -36px;
+    left: 75px;
+}

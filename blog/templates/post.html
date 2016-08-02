@@ -34,7 +34,6 @@
                             span {
                                 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
                                 font-weight: 700;
-
                             }
                          </style>
                         - {{ moment(comment['comment_time']).fromNow() }}
@@ -46,6 +45,19 @@
                         </div>
                       </div>
                     </div>
+                    {% if user.role == 3 %}
+                    <div class="comment-footer">
+                        {% if comment['is_disabled'] == true %}
+                        <a href="{{ url_for('comment_disable', id=comment['id'], post_id=comment['post_id']) }}">
+                            <span class="label label-danger">Enable</span>
+                        </a>
+                        {% elif comment['is_disabled'] == false %}
+                        <a href="{{ url_for('comment_disable', id=comment['id'], post_id=comment['post_id']) }}">
+                            <span class="label label-danger">Disable</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </li>
             </ul>
         </div>
