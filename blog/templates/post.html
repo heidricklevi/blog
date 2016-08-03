@@ -17,7 +17,7 @@
 
     {% for comment in comments %}
        <div class="post-list">
-            <ul style="list-style: none; padding-left: 0;">
+            <ul id="comment-ul" style="list-style: none; padding-left: 0;">
                 <li style="float: left">
                     <div class="posted-comment" style="padding-left: 0; border-radius: 3px; display: inline; padding-bottom: 24px "><a href="{{ url_for('.user', username=comment['username']) }}">
                         <img src="https://secure.gravatar.com/avatar/{{ comment['gravatar_hash'] }}?s=50&d=identicon&r=g" class="user">
@@ -45,23 +45,39 @@
                         </div>
                       </div>
                     </div>
-                    {% if user.role == 3 %}
-                    <div class="comment-footer">
+                    <div class="comment-footer" >
                         {% if comment['is_disabled'] == true %}
                         <a href="{{ url_for('comment_disable', id=comment['id'], post_id=comment['post_id']) }}">
-                            <span class="label label-danger">Enable</span>
+                            <span id="com-disabled" class="label label-danger">Enable</span>
                         </a>
                         {% elif comment['is_disabled'] == false %}
                         <a href="{{ url_for('comment_disable', id=comment['id'], post_id=comment['post_id']) }}">
-                            <span class="label label-danger">Disable</span>
+                            <span id="com-enabled" class="label label-danger">Disable</span>
                         </a>
                         {% endif %}
                     </div>
-                    {% endif %}
                 </li>
             </ul>
         </div>
     {% endfor %}
+
+    {% if user.role != 3 %}
+    <script type="text/javascript">
+           var mod = document.getElementsByClassName("comment-footer");
+           for (var i = 0; i < mod.length; i++){
+               comment_footer = mod.item(i);
+               comment_footer.style.display = 'none';
+           }
+        </script>
+    {% endif %}
+
+    <script type="text/javascript">
+        var c = document.getElementsByClassName('post-list');
+        for (var i = 0; i < c.length; i++){
+            var cm = c.item(i);
+            console.log(cm);
+        }
+    </script>
 
 {% endblock %}
 
@@ -85,18 +101,15 @@
         <style scoped>
             #comment-form {
                 -webkit-filter: blur(5px);
-                filter: blur(5px);
-            }
-            #comment_body textarea {
-                max-lines: 0;
+                filter: blur(10px);
             }
         </style>
-        <p style="font-family: Verdana">Please <a href="{{ url_for('login_page') }}">Sign in </a> or <a href="{{ url_for("register") }}"> Create Account</a> to post a comment. </p>
+        <p style="font-family: Verdana">Please <a href="{{ url_for("register") }}"> Create Account</a> and/or <a href="{{ url_for('login_page') }}">Sign in </a>to post a comment.</p>
     {% endif %}
         <form id="comment-form" class="form-horizontal" action="{{ url_for('post_comment', id=posts[0]['posts_id']) }}" method="post">
             <div class="comments">
                 <div class="avatar">
-                    {% if user.is_anonymous %}
+                    {% if user.is_anonymous == true %}
                     <img data-role="user-avatar" src="../static/img/Default-Gravatar.jpg" class="user" style="width: 50px; height: 50px">
                     {% else %}
                     <img data-role="user-avatar" src="{{ user.gravatar(size=50) }}" class="user">

@@ -153,12 +153,12 @@ class DBHelper():
         finally:
             conn.close()
 
-    def insert_comment(self, body, comment_time, author_id, post_id, is_disabled):
+    def insert_comment(self, body, comment_time, author_id, post_id, is_disabled, modified):
         conn = self.connect()
         try:
-            query = "INSERT INTO comments (body, comment_time, author_id, post_id, is_disabled) VALUES (%s, %s, %s, %s, %s);"
+            query = "INSERT INTO comments (body, comment_time, author_id, post_id, is_disabled, modified) VALUES (%s, %s, %s, %s, %s, %s);"
             with conn.cursor() as cursor:
-                cursor.execute(query, (body, comment_time, author_id, post_id, is_disabled))
+                cursor.execute(query, (body, comment_time, author_id, post_id, is_disabled, modified))
                 conn.commit()
         finally:
             conn.close()
@@ -167,7 +167,7 @@ class DBHelper():
         conn = self.connect()
         try:
             query = """select users.username, users.gravatar_hash, users.confirmed, users.roles_id, users.email,
-                       comments.body, comments.id, comments.comment_time, comments.is_disabled, comments.post_id
+                       comments.body, comments.id, comments.comment_time, comments.modified, comments.is_disabled, comments.post_id
                        from blog.comments join users on comments.author_id = users.id
                        WHERE post_id = %s ORDER BY comment_time ASC;"""
             with conn.cursor() as cursor:
