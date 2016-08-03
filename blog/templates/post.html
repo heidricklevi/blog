@@ -81,10 +81,26 @@
         </nav>
     </header>
     <div id="posts">
-        <form class="form-horizontal" action="{{ url_for('post_comment', id=posts[0]['posts_id']) }}" method="post">
+    {% if user.is_anonymous == true %}
+        <style scoped>
+            #comment-form {
+                -webkit-filter: blur(5px);
+                filter: blur(5px);
+            }
+            #comment_body textarea {
+                max-lines: 0;
+            }
+        </style>
+        <p style="font-family: Verdana">Please <a href="{{ url_for('login_page') }}">Sign in </a> or <a href="{{ url_for("register") }}"> Create Account</a> to post a comment. </p>
+    {% endif %}
+        <form id="comment-form" class="form-horizontal" action="{{ url_for('post_comment', id=posts[0]['posts_id']) }}" method="post">
             <div class="comments">
                 <div class="avatar">
+                    {% if user.is_anonymous %}
+                    <img data-role="user-avatar" src="../static/img/Default-Gravatar.jpg" class="user" style="width: 50px; height: 50px">
+                    {% else %}
                     <img data-role="user-avatar" src="{{ user.gravatar(size=50) }}" class="user">
+                    {% endif %}
                 </div>
 
                 <div class="comment-body" style="position: relative; left: 60px; right: 0; top: 0; ">
@@ -99,6 +115,8 @@
 
             </div>
         </form>
+
+
 
     </div>
 <!---------------------------------------------------------------------->
