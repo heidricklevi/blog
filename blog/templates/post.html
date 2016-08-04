@@ -28,7 +28,7 @@
                 <li style="margin-bottom: auto; ">
                      <header class="comment-header" style="line-height: 1; font-size: 13px">
                         <span class="post-byline">
-                            <span class="author pub-color">{{ comment['username'] }}</span>
+                            <span id="username" class="author pub-color">{{ comment['username'] }}</span>
                         </span>
                          <style scoped>
                             span {
@@ -75,27 +75,31 @@
         var c = document.getElementsByClassName('comment-footer');
         for (var i = 0; i < c.length; i++){
             var cm = c.item(i);
-            chNode = cm.childNodes;
+            var chNode = cm.childNodes;
             for (var j = 0; j < chNode.length; j++){
-                q = chNode.item(j);
-                anch = q.firstChild;
+                var q = chNode.item(j);
+                var anch = q.firstChild;
                 if (anch != null){
                     anch = anch.nextSibling;
                     if (anch['id'] == "com-disabled"){
                         disableComment(anch);
                     }
                 }
-
             }
-
-
         }
-
 
         function disableComment(anch){
             var parent = anch.firstChild.parentNode.offsetParent;
-            commentUL = parent.parentNode.parentNode;
-            console.log(commentUL);
+            commentUL = parent.parentNode.parentNode.firstElementChild;
+            commentBody = commentUL.nextElementSibling.childNodes[1];
+
+            commentUL.firstElementChild.firstElementChild.firstElementChild
+                    .setAttribute('src', "../static/img/Default-Gravatar.jpg");
+            commentUL.firstElementChild.firstElementChild.firstElementChild.setAttribute('style', 'width: 50px; height: 50px;');
+            commentUL.nextElementSibling.getElementsByTagName('p')[0].innerHTML
+             = "This comment has been disabled by the site administrator.";
+
+            commentBody.firstElementChild.firstElementChild.innerHTML = "Admin";
         }
     </script>
 
