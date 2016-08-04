@@ -72,10 +72,30 @@
     {% endif %}
 
     <script type="text/javascript">
-        var c = document.getElementsByClassName('post-list');
+        var c = document.getElementsByClassName('comment-footer');
         for (var i = 0; i < c.length; i++){
             var cm = c.item(i);
-            console.log(cm);
+            chNode = cm.childNodes;
+            for (var j = 0; j < chNode.length; j++){
+                q = chNode.item(j);
+                anch = q.firstChild;
+                if (anch != null){
+                    anch = anch.nextSibling;
+                    if (anch['id'] == "com-disabled"){
+                        disableComment(anch);
+                    }
+                }
+
+            }
+
+
+        }
+
+
+        function disableComment(anch){
+            var parent = anch.firstChild.parentNode.offsetParent;
+            commentUL = parent.parentNode.parentNode;
+            console.log(commentUL);
         }
     </script>
 
