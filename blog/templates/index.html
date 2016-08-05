@@ -55,9 +55,16 @@
             <a href="{{ url_for('permalink_post', id=post['posts_id']) }}">
                 <span class="label label-default">Permalink</span></a>
             &nbsp;
-
-            <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
-                <span class="label label-primary">{{ post['comment_count'] }} Comments</span></a>&nbsp;
+            {% if post['comment_count'] == None %}
+                <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
+                    <span class="label label-primary">0 Comments</span></a>&nbsp;
+            {% elif post['comment_count'] == 1 %}
+                <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
+                    <span class="label label-primary">{{ post['comment_count'] }} Comment</span></a>&nbsp;
+            {% else %}
+                <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
+                    <span class="label label-primary">{{ post['comment_count'] }} Comments</span></a>&nbsp;
+            {% endif %}
 
         {% if current_user.role == 3 %}
             <a href="{{ url_for('post_edit', id=post['posts_id']) }}">

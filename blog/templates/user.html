@@ -10,9 +10,9 @@
     <div class="page-header">
         <h1>{{ user[0]['name'] }}</h1>
 
-    {% if user[0]['email'] or user[0]['location']%}
+    {% if user[0]['username'] or user[0]['location']%}
     <p>
-        {% if user[0]['email'] %}{{ user[0]['email']}}{% endif %}
+        {% if user[0]['username'] %}{{ user[0]['username']}}{% endif %}
         {% if user[0]['location'] %}
             From <a href="http://maps.google.com/?q={{ user[0]['location']}}">{{ user[0]['location']}}</a>
         {% endif %}
@@ -44,8 +44,8 @@
                         <div class="post-date">{{ post['post_time'] }}</div>
                         <div class="post-author"><a href="{{ url_for('.user', username=user[0]['username']) }}">
                             {{ user[0]['name'] }}</a></div>
-                        <div class="post-body">
-                            {{ post['body'] }}
+                        <div class="post-title">
+                            {{ post['post_title'] }}
                         </div>
                         <div class="post-footer">
                             <a href="{{ url_for("permalink_post", id=post["posts_id"]) }}">
@@ -53,6 +53,9 @@
 
                             <a href="{{ url_for("permalink_post", id=post["posts_id"]) }}#comments">
                                 <span class="label label-primary">{{ post["comment_count"] }} Comments</span></a>
+
+                             <a style="float: left" href="{{ url_for("permalink_post", id=post["posts_id"]) }}">
+                                <span class="label label-primary">Read Post . . . </span></a>&nbsp;
                         </div>
                     </div>
                 </li>

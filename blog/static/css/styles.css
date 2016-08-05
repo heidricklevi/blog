@@ -40,6 +40,7 @@ div.post-content {
 }
 div.post-footer {
     text-align: right;
+    margin-top: 10px;
 }
 ul.comments {
     list-style-type: none;
@@ -120,4 +121,10 @@ div.flask-pagedown-preview h3 {
     padding-left: 2px;
     padding: .1em .25em;
     font-size: 150%;
+}
+
+.post-title {
+    font-family: verdana;
+    font-weight: 700;
+    font-size: large
 }
