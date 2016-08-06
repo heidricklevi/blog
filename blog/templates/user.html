@@ -1,4 +1,4 @@
-{% extends "authenticated_base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
     <div class="align-left">
@@ -32,7 +32,7 @@
 
 {% if user[0]['roles_id'] == 3 %}
     <h3>Posts by this Author:</h3>
-        <ul class="posts">
+        <ul class="posts" style="list-style-type:none ">
             {% for post in posts %}
                 <li class="blog-post">
                     <div class="post-thumbnail">
@@ -73,4 +73,10 @@
 {% endblock %}
 
 {% block paginate %}
+{% endblock %}
+
+{% block blog_title %}
+{% endblock %}
+
+{% block blog_title_description %}
 {% endblock %}

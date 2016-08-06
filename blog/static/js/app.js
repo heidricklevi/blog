@@ -36,3 +36,7 @@ $(function () {
 
     });
 });
+
+$(function () {
+    $("#comment_body").autogrow();
+});

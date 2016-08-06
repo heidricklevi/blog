@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block post %}
 
     <h2 class="blog-post-title">{{ posts[0]['post_title'] }}</h2>
     <p class="blog-post-meta">{{ posts[0]['post_time'] }} <a href="{{ url_for('.user', username=posts[0]['username']) }}">{{ posts[0]['username'] }}</a> </p>
@@ -18,7 +18,7 @@
     {% for comment in comments %}
        <div class="post-list">
             <ul id="comment-ul" style="list-style: none; padding-left: 0;">
-                <li style="float: left">
+                <li style="float: left; height: auto">
                     <div class="posted-comment" style="padding-left: 0; border-radius: 3px; display: inline; padding-bottom: 24px "><a href="{{ url_for('.user', username=comment['username']) }}">
                         <img src="https://secure.gravatar.com/avatar/{{ comment['gravatar_hash'] }}?s=50&d=identicon&r=g" class="user">
                     </a>
@@ -39,7 +39,7 @@
                         - {{ moment(comment['comment_time']).fromNow() }}
                      </header>
                     <div class="comment-display-body">
-                      <div style="position: relative; top: -40px; left: 4px">
+                      <div style="position: relative; ">
                         <div class="comment-inner" style="">
                             <p style="margin-bottom: auto">{{ comment['body'] }}</p>
                         </div>

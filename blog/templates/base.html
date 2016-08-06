@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../static/css/blog.css" rel="stylesheet">
-
+    <link href="../static/css/styles.css" rel="stylesheet">
     <link href="../static/css/comments.css" rel="stylesheet">
     <link href="../static/css/bootstrap-markdown.min.css" rel="stylesheet">
 
@@ -69,11 +69,16 @@
     </div>
 
     <div class="container">
-      <div class="blog-header">
+    {% block content %}
+    {% endblock %}
 
+    {% block blog_header %}
+      <div class="blog-header">
         <h1 class="blog-title">{% block blog_title %}The Bootstrap Blog {% endblock %}</h1>
         <p class="lead blog-description">{% block blog_title_description %}The official example template of creating a blog with Bootstrap.{% endblock %}</p>
       </div>
+
+    {% endblock %}
 
     {% if current_user.role == 3 %}
 
@@ -87,7 +92,7 @@
 
         <div class="col-sm-8 blog-main">
           <div class="blog-post">
-            {% block content %}
+            {% block post %}
               {% endblock %}
           </div><!-- /.blog-post -->
             {% block comments %}
@@ -159,6 +164,7 @@
     {% block scripts %} {{ moment.include_moment() }} {% endblock %}
     <script>window.jQuery || document.write('<script src="../static/js/jquery.min.js"><\/script>')</script>
     <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.autogrow-textarea.js"></script>
     <script src="../static/js/app.js"></script>
     <script src="../static/js/bootstrap-markdown.js"></script>
 
