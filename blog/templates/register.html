@@ -4,9 +4,9 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Please fill out the details below to create your account. </h2>
+    <h2 style="padding-top: 50px">Please fill out the details below to create your account. </h2>
 
-<form class="form-horizontal" action="/register/createaccount" method="post">
+<form class="form-horizontal" style="padding-top: 50px" action="/register/createaccount" method="post">
               {{ registrationform.csrf_token }}
               <div class="form-group">
                   <div class="col-sm-9">
@@ -70,4 +70,10 @@
                 </div>
           </form>
 
+{% endblock %}
+
+{% block blog_title_description %}
+{% endblock %}
+
+{% block paginate %}
 {% endblock %}

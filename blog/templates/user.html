@@ -1,34 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="align-left">
-      <div class="col-sm-offset-3">
-        <img src="{{ user_one.gravatar(size=256) }}" class="img-rounded">
-    </div>
-    </div>
+    <style>
+        @media (min-width: 768px) {
+         .col-sm-offset-3{
+            margin-left: 0;
+         }
+        }
+    </style>
+{#    <div class="align-left">#}
+{#      <div class="col-sm-offset-3">#}
+{#        <img src="{{ user_one.gravatar(size=256) }}" class="img-rounded">#}
+{#    </div>#}
+{#    </div>#}
 
     <div class="page-header">
-        <h1>{{ user[0]['name'] }}</h1>
+       <div class="col-sm-offset-3">
+        <img src="{{ user_one.gravatar(size=256) }}" class="img-rounded">
+        <div style="display: inline-block; padding-left: 50px">
+            <h1>{{ user[0]['name'] }}</h1>
 
-    {% if user[0]['username'] or user[0]['location']%}
-    <p>
-        {% if user[0]['username'] %}{{ user[0]['username']}}{% endif %}
-        {% if user[0]['location'] %}
-            From <a href="http://maps.google.com/?q={{ user[0]['location']}}">{{ user[0]['location']}}</a>
+        {% if user[0]['username'] or user[0]['location']%}
+        <p>
+            {% if user[0]['username'] %}{{ user[0]['username']}}{% endif %}
+            {% if user[0]['location'] %}
+                From <a href="http://maps.google.com/?q={{ user[0]['location']}}">{{ user[0]['location']}}</a>
+            {% endif %}
+
+        </p>
         {% endif %}
 
-    </p>
-    {% endif %}
+        {% if user[0]['about_me'] %}<p>{{ user[0]['about_me'] }}</p>{% endif %}
 
-    {% if user[0]['about_me'] %}<p>{{ user[0]['about_me'] }}</p>{% endif %}
-
-    <p>
-        Member Since {{ moment(user[0]['registration_date']).format('LL') }}
-        <br />
-        Last Seen {{ moment(user[0]['modified_at']).fromNow() }}
-    </p>
+        <p>
+            Member Since {{ moment(user[0]['registration_date']).format('LL') }}
+            <br />
+            Last Seen {{ moment(user[0]['modified_at']).fromNow() }}
+        </p>
     </div>
-
+    </div>
+    </div>
 
 {% if user[0]['roles_id'] == 3 %}
     <h3>Posts by this Author:</h3>

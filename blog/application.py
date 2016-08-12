@@ -2,8 +2,6 @@ import datetime
 import bcrypt
 import config
 import smtplib
-import json
-from bson import json_util
 from flask import Flask, session, render_template, request, flash, redirect, url_for, abort
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
 from dbhelper import DBHelper
@@ -77,9 +75,8 @@ def permalink_post(id):
     post = DB.get_post_id(id)
     user = current_user._get_current_object()
     comments = DB.get_comments_by_author(id)
-    js_comments = json.dumps(comments, default=json_util.default)
     DB.update_comment(len(comments), id)
-    return render_template("post.html", user=user, comments=comments, posts=post, form=CommentForm(), js_c=js_comments)
+    return render_template("post.html", user=user, comments=comments, posts=post, form=CommentForm())
 
 
 @application.route('/comment/<int:id>', methods=['POST'])
@@ -232,7 +229,7 @@ def create_user():
 
     DB.create_user(ROLE, form.username.data, form.name.data, form.email.data, datetime.datetime.now(), hashed,
                        datetime.datetime.now(), False)
-    user = User(form.email.data, username=form.username.data, password=hashed, confirmed=False, role=ROLE)
+    user = User(email=form.email.data, username=form.username.data, password=hashed, confirmed=False, role=ROLE)
 
     token = User.generate_confirmation_token(user, expiration=3600)
     send_email(config.mail_username, config.mail_password, config.to_address, "test", user=user, token=token)
