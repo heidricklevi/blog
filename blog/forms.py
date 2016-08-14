@@ -15,11 +15,6 @@ class RegistrationForm(Form):
     submit = SubmitField('submit', [validators.DataRequired()])
 
 
-class LoginForm(Form):
-    email = EmailField('email', validators=[validators.DataRequired(), validators.Email()])
-    password = PasswordField('password', validators=[validators.DataRequired()])
-    submit = SubmitField('submit', [validators.DataRequired()])
-
 class EditProfileForm(Form):
     name = StringField('Real Name', validators=[Length(0, 64)])
     location = StringField("Location", validators=[Length(0,64)])

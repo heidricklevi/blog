@@ -9,7 +9,7 @@ from flask.ext.moment import Moment
 from user import User, AnonymousUser
 from markdown import markdown
 from flask.ext.paginate import Pagination
-from forms import RegistrationForm, LoginForm, EditProfileForm, User_EditForm, PostForm, CommentForm
+from forms import RegistrationForm, EditProfileForm, User_EditForm, PostForm, CommentForm
 from flask_mail import Mail
 
 
@@ -209,32 +209,28 @@ def confirm(token):
     return redirect(url_for('login'))
 
 
-@application.route('/register', methods=['GET'])
-def register():
-    return render_template("register.html", registrationform=RegistrationForm())
-
-
-@application.route('/register/createaccount', methods=['POST'])
+@application.route('/register', methods=['POST'])
 def create_user():
-    form = RegistrationForm(request.form)
-    stored_user = DB.get_user_login(form.email.data)
+    form_name = request.form['signup-name']
+    form_username = request.form['signup-username']
+    form_email = request.form['signup-email']
+    form_password = request.form['signup-password']
+    form_confirm_password = request.form['signup-password-confirm']
+
+    stored_user = DB.get_user_login(form_email)
     if stored_user:
-        form.email.errors = list()
-        form.email.errors.append("Email Address Already Registered")
-        return render_template("register.html", registrationform=form)
+        error = "Email Address already registered"
+        return redirect(url_for('home'))
+    hashed = bcrypt.hashpw(str(form_password).encode(), bcrypt.gensalt())
 
-    hashed = bcrypt.hashpw(str(form.password.data).encode(), bcrypt.gensalt())
+    ROLE = ROLE_ADMINISTRATOR if form_email in config.administrators else ROLE_USER
 
-    ROLE = ROLE_ADMINISTRATOR if form.email.data in config.administrators else ROLE_USER
-
-    DB.create_user(ROLE, form.username.data, form.name.data, form.email.data, datetime.datetime.now(), hashed,
+    DB.create_user(ROLE, form_username, form_name, form_email, datetime.datetime.now(), hashed,
                        datetime.datetime.now(), False)
-    user = User(email=form.email.data, username=form.username.data, password=hashed, confirmed=False, role=ROLE)
-
+    user = User(email=form_email, username=form_username, password=hashed, confirmed=False, role=ROLE)
     token = User.generate_confirmation_token(user, expiration=3600)
     send_email(config.mail_username, config.mail_password, config.to_address, "test", user=user, token=token)
-
-    return render_template("register.html", registrationform=form)
+    return redirect(url_for('home'))
 
 
 @application.route('/admin/', defaults={'page':1})
@@ -300,25 +296,22 @@ def logout():
     return redirect(url_for("home"))
 
 
-@application.route('/login')
-def login_page():
-    return render_template('login.html', loginform=LoginForm())
-
-
-@application.route('/login/verify', methods=['POST'])
+@application.route('/login', methods=['POST'])
 def login():
-    form = LoginForm(request.form)
-    if form.validate():
-        stored_user = DB.get_user_login(form.email.data)
+
+        form_email = request.form['login_email']
+        form_password = request.form['password']
+
+        stored_user = DB.get_user_login(form_email)
         hashed = str(stored_user[0]['password']).encode()
-        if stored_user and bcrypt.hashpw(str(form.password.data).encode(), hashed) == hashed:
-            user = User(form.email.data, username=stored_user[0]['username'], password=hashed,
+
+        if stored_user and bcrypt.hashpw(str(form_password).encode(), hashed) == hashed:
+            user = User(form_email, username=stored_user[0]['username'], password=hashed,
                         confirmed=stored_user[0]['confirmed'], role=stored_user[0]['roles_id'])
             login_user(user, remember=True)
-            return render_template("login.html", loginform=form)
+            return redirect(url_for("home"))
 
-        form.email.errors.append("Email or Password is invalid")
-    return render_template("login.html", loginform=form)
+        return redirect(url_for("home"))
 
 
 @login_manager.user_loader
@@ -326,7 +319,6 @@ def load_user(user_id):
     stored_user = DB.get_user_login(user_id)
     user_password = str(stored_user[0]['password'].encode())
     if user_password:
-
         return User(stored_user[0]['email'], username=stored_user[0]['username'], password=user_password,
                     confirmed=stored_user[0]['confirmed'], role=stored_user[0]['roles_id'])
 

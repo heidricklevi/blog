@@ -18,6 +18,11 @@
     <link href="../static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="../static/css/style.css"> <!-- Gem style -->
     <link href="../static/css/blog.css" rel="stylesheet">
     <link href="../static/css/styles.css" rel="stylesheet">
     <link href="../static/css/comments.css" rel="stylesheet">
@@ -37,30 +42,124 @@
 
     <div class="blog-masthead">
       <div class="container">
-        {#<nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">About</a>
-          <a class="blog-nav-item" href="#">Account</a>#}
-          <ul class="nav navbar-nav navbar-right">
+
+		<nav class="main-nav">
+			<ul>
+				<!-- insert more links here -->
+
+
               {% if current_user.is_authenticated %}
-              <li><a class="blog-nav-item" href="{{ url_for('logout') }}">Sign out</a> </li>
+              <li><a class="nav-items" href="{{ url_for('logout') }}">Sign out</a> </li>
 {#              <li><a class="blog-nav-item" href="{{ url_for('account') }}">Account</a></li>#}
-              <li><a class="blog-nav-item" href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+              <li><a class="nav-items" href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
                   {% if current_user.role == 3 %}
-                      <li><a class="blog-nav-item" href="{{ url_for('admin_panel') }}">Admin</a></li>
+                      <li><a class="nav-items" href="{{ url_for('admin_panel') }}">Admin</a></li>
                   {% endif %}
               {% else %}
-              <li><a class="blog-nav-item" href="{{ url_for('login_page') }}">Sign in</a> </li>
-              <li><a class="blog-nav-item" href="{{ url_for("register") }}">Create Account</a> </li>
+              <li><a class="cd-signin" href="#cd-login">Sign in</a> </li>
+              <li><a class="cd-signup" href="#cd-signup">Create Account</a></li>
               {% endif %}
+			</ul>
+		</nav>
+
+	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+			<ul class="cd-switcher">
+				<li><a href="#cd-login">Sign in</a></li>
+				<li><a href="#cd-signup">New account</a></li>
+			</ul>
+
+			<div id="cd-login"> <!-- log in form -->
+				<form class="cd-form" action="/login" method="post">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-email">E-mail</label>
+						<input class="full-width has-padding has-border" name="login_email" id="signin-email" type="email" placeholder="E-mail">
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input class="full-width has-padding has-border" name="password" id="signin-password" type="password"  placeholder="Password">
+                        <span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="remember-me" checked>
+						<label for="remember-me">Remember me</label>
+					</p>
+
+                    <p class="fieldset">
+						<input class="full-width" type="submit" value="Login">
+					</p>
+
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-login -->
+
+			<div id="cd-signup"> <!-- sign up form -->
+				<form class="cd-form" action="/register" method="post">
+                    <p class="fieldset">
+                        <input class="full-width has-padding has-border" name="signup-name" id="signup-name" type="text" placeholder="First & Last Name">
+                    </p>
 
 
-          </ul>
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<input class="full-width has-padding has-border" name="signup-username" id="signup-username" type="text" placeholder="Username">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signup-email">E-mail</label>
+						<input class="full-width has-padding has-border" name="signup-email" id="signup-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input class="full-width has-padding has-border" name="signup-password" id="signup-password" type="password"  placeholder="Password">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+                    <p class="fieldset">
+                        <label class="image-replace cd-password" for="signup-password">Password</label>
+                        <input class="full-width has-padding has-border" name="signup-password-confirm" type="password" placeholder="Confirm Password">
+                        <span class="cd-error-message">Error message here!</span>
+                    </p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Create account">
+					</p>
+				</form>
+
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-signup -->
+
+			<div id="cd-reset-password"> <!-- reset password form -->
+				<p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="reset-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Reset password">
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+			</div> <!-- cd-reset-password -->
+			<a href="#0" class="cd-close-form">Close</a>
+		</div> <!-- cd-user-modal-container -->
+	</div> <!-- cd-user-modal -->
 
         <nav class="blog-nav">
-          <ul class="nav navbar-nav">
-            <li><a class="blog-nav-item active" href="/">Home</a></li>
+          <ul>
+            <li><a class="nav-items" href="/">Home</a></li>
 {#            <li><a class="blog-nav-item" href="#">About</a></li>#}
 {#            <li><a class="blog-nav-item" href="#">Contact</a></li>#}
           </ul>
@@ -165,6 +264,8 @@
     <script>window.jQuery || document.write('<script src="../static/js/jquery.min.js"><\/script>')</script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/jquery.autogrow-textarea.js"></script>
+    <script src="../static/js/nav_signup_signin.js"></script>
+    <script src="../static/js/modernizr.js"></script>
     <script src="../static/js/app.js"></script>
     <script src="../static/js/bootstrap-markdown.js"></script>
 
