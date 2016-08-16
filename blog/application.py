@@ -9,7 +9,7 @@ from flask.ext.moment import Moment
 from user import User, AnonymousUser
 from markdown import markdown
 from flask.ext.paginate import Pagination
-from forms import RegistrationForm, EditProfileForm, User_EditForm, PostForm, CommentForm
+from forms import EditProfileForm, User_EditForm, PostForm, CommentForm
 from flask_mail import Mail
 
 

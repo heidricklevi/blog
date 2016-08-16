@@ -30,13 +30,15 @@
         </p>
         {% endif %}
 
-        {% if user[0]['about_me'] %}<p>{{ user[0]['about_me'] }}</p>{% endif %}
 
         <p>
-            Member Since {{ moment(user[0]['registration_date']).format('LL') }}
-            <br />
-            Last Seen {{ moment(user[0]['modified_at']).fromNow() }}
+            Member Since {{ moment(user[0]['registration_date']).format('LL') }} |
+            Last Active {{ moment(user[0]['modified_at']).fromNow() }}
         </p>
+
+
+        {% if user[0]['about_me'] %}<p>{{ user[0]['about_me'] }}</p>{% endif %}
+
     </div>
     </div>
     </div>
@@ -52,7 +54,7 @@
                         </a>
                     </div>
                     <div class="post-content">
-                        <div class="post-date">{{ post['post_time'] }}</div>
+                        <div class="post-date">{{ moment(post['post_time']).fromNow() }}</div>
                         <div class="post-author"><a href="{{ url_for('.user', username=user[0]['username']) }}">
                             {{ user[0]['name'] }}</a></div>
                         <div class="post-title">
@@ -62,8 +64,16 @@
                             <a href="{{ url_for("permalink_post", id=post["posts_id"]) }}">
                                 <span class="label label-primary">Permalink</span></a>&nbsp;
 
-                            <a href="{{ url_for("permalink_post", id=post["posts_id"]) }}#comments">
-                                <span class="label label-primary">{{ post["comment_count"] }} Comments</span></a>
+                            {% if post['comment_count'] == None %}
+                                <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
+                                    <span class="label label-primary">0 Comments</span></a>&nbsp;
+                            {% elif post['comment_count'] == 1 %}
+                                <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
+                                    <span class="label label-primary">{{ post['comment_count'] }} Comment</span></a>&nbsp;
+                            {% else %}
+                                <a id="comment_number" href="{{ url_for('permalink_post', id=post['posts_id']) }}#comments">
+                                    <span class="label label-primary">{{ post['comment_count'] }} Comments</span></a>&nbsp;
+                            {% endif %}
 
                              <a style="float: left" href="{{ url_for("permalink_post", id=post["posts_id"]) }}">
                                 <span class="label label-primary">Read Post . . . </span></a>&nbsp;

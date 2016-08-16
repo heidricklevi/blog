@@ -10,6 +10,25 @@ jQuery(document).ready(function($){
 		backToLoginLink = formForgotPassword.find('.cd-form-bottom-message a'),
 		mainNav = $('.main-nav');
 
+	//added below to accommodate navbar collapse with smaller screened devices
+		if ( $(window).width() < 768) {
+
+			blogNav = document.getElementById('blog-nav');
+			blogNav.parentNode.removeChild(blogNav);
+
+			var mainNavUl = mainNav.children('ul');
+			mainNavUl[0].setAttribute('style', 'width: 100px');
+			var li = document.createElement('li');
+			var a = document.createElement('a');
+			$(a).attr({
+				"class": "nav-items",
+				"href": "/"
+			});
+			a.text = "Home";
+			li.appendChild(a);
+			mainNavUl[0].appendChild(li);
+		}
+
 	//open modal
 	mainNav.on('click', function(event){
 		$(event.target).is(mainNav) && mainNav.children('ul').toggleClass('is-visible');

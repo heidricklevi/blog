@@ -42,9 +42,9 @@
      {% block post %}
      {% for post in posts %}
         <h2 class="blog-post-title">
-            <a href="{{ url_for('permalink_post', id=post['posts_id']) }}" style="color: #0f0f0f">{{ post['post_title'] }}</a>
+            <a href="{{ url_for('permalink_post', id=post['posts_id']) }}" style="color: #2e383c">{{ post['post_title'] }}</a>
         </h2>
-         <p class="blog-post-meta">{{ post['post_time'] }} <a href="{{ url_for('.user', username=post['username']) }}">{{ post['username'] }}</a> </p>
+         <p class="blog-post-meta">{{ moment(post['post_time']).format('LL') }} | <a href="{{ url_for('.user', username=post['username']) }}">{{ post['name'] }}</a> </p>
 
          {{ post['body'] | safe }}
 
