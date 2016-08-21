@@ -41,16 +41,17 @@
 
      {% block post %}
      {% for post in posts %}
+         <div class="blog-post">
         <h2 class="blog-post-title">
             <a href="{{ url_for('permalink_post', id=post['posts_id']) }}" style="color: #2e383c">{{ post['post_title'] }}</a>
         </h2>
          <p class="blog-post-meta">{{ moment(post['post_time']).format('LL') }} | <a href="{{ url_for('.user', username=post['username']) }}">{{ post['name'] }}</a> </p>
 
-         {{ post['body'] | safe }}
+            {{ post['body'] | safe }}
 
          <br />
          <br />
-
+        </div>
         <div class="post-footer">
             <a href="{{ url_for('permalink_post', id=post['posts_id']) }}">
                 <span class="label label-default">Permalink</span></a>

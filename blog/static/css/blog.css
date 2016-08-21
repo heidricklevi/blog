@@ -80,6 +80,7 @@ h6, .h6 {
 }
 
 .blog-nav ul {
+  list-style-type: none;
   position: static;
   line-height: 80px;
 

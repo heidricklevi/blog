@@ -4,11 +4,13 @@ import config
 import smtplib
 from flask import Flask, session, render_template, request, flash, redirect, url_for, abort
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
-from dbhelper import DBHelper
-from flask.ext.moment import Moment
-from user import User, AnonymousUser
-from markdown import markdown
 from flask.ext.paginate import Pagination
+from flask.ext.markdown import Markdown
+from flask.ext.moment import Moment
+from dbhelper import DBHelper
+from user import User, AnonymousUser
+# from markdown import markdown
+
 from forms import EditProfileForm, User_EditForm, PostForm, CommentForm
 from flask_mail import Mail
 
@@ -21,6 +23,7 @@ login_manager = LoginManager(application)
 DB = DBHelper()
 moment = Moment(application)
 mail = Mail(application)
+markdown = Markdown(application, safe_mode=False, output_format='html4')
 
 ROLE_USER = 1
 ROLE_MODERATOR = 2
@@ -64,6 +67,7 @@ def home(page):
     all_posts = DB.get_all_posts()
     comments = DB.get_comments()
     posts = DB.get_limited_posts(start_at=start_at, per_page=per_page)
+
     paginate = Pagination(page=page, per_page=per_page, record_name='posts', total=all_posts.__len__(),
                           format_total=True, css_framework='bootstrap3')
 
@@ -134,7 +138,7 @@ def submit_post():
     user = current_user._get_current_object()
 
     if form.validate_on_submit and user.role is ROLE_ADMINISTRATOR:
-        DB.create_blog_post(author_id=user.id, body=markdown(request.form['text_post'], output_format='html'),
+        DB.create_blog_post(author_id=user.id, body=request.form['text_post'],
                             post_title=form.title.data, post_time=datetime.datetime.now(), modified_time=datetime.datetime.now())
 
     return redirect(url_for('home'))

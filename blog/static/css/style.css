@@ -96,6 +96,7 @@ header[role=banner]::after {
   cursor: pointer;
 }
 .main-nav ul {
+  list-style-type: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -130,6 +131,7 @@ header[role=banner]::after {
     cursor: auto;
   }
   .main-nav ul {
+    list-style-type: none;
     position: static;
     width: auto;
     -webkit-transform: translateY(0);
@@ -140,6 +142,7 @@ header[role=banner]::after {
     line-height: 80px;
   }
   .main-nav ul.is-visible {
+    list-style-type: none;
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);

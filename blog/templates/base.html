@@ -44,7 +44,7 @@
       <div class="container">
 
 		<nav class="main-nav navbar">
-			<ul>
+			<ul style="list-style-type: none">
 				<!-- insert more links here -->
 
 
@@ -57,7 +57,7 @@
                   {% endif %}
               {% else %}
               <li><a class="cd-signin" href="#cd-login">Sign in</a> </li>
-              <li><a class="cd-signup" href="#cd-signup">Create Account</a></li>
+              <li><a class="cd-signup" href="#cd-signup">Sign up</a></li>
               {% endif %}
 
 			</ul>
@@ -160,7 +160,7 @@
 	</div> <!-- cd-user-modal -->
 
         <nav id="blog-nav" class="blog-nav">
-          <ul>
+          <ul style="list-style-type: none">
             <li><a class="nav-items" href="/">Home</a></li>
 {#            <li><a class="blog-nav-item" href="#">About</a></li>#}
 {#            <li><a class="blog-nav-item" href="#">Contact</a></li>#}
@@ -187,10 +187,10 @@
 
       <div class="row">
         <div class="col-sm-8 blog-main">
-          <div class="blog-post">
+
             {% block post %}
               {% endblock %}
-          </div><!-- /.blog-post -->
+          <!-- /.blog-post -->
             {% block comments %}
             {% endblock %}
 

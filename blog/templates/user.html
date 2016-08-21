@@ -5,6 +5,7 @@
         @media (min-width: 768px) {
          .col-sm-offset-3{
             margin-left: 0;
+            display: list-item;
          }
         }
     </style>
@@ -15,29 +16,42 @@
 {#    </div>#}
 
     <div class="page-header">
-       <div class="col-sm-offset-3">
+       <div class="col-sm-offset-3" style="display: -webkit-box; margin-bottom: 5%">
         <img src="{{ user_one.gravatar(size=256) }}" class="img-rounded">
-        <div style="display: inline-block; padding-left: 50px">
-            <h1>{{ user[0]['name'] }}</h1>
+        <div style="padding-left: 15%; word-break: keep-all">
+                <div style="padding-top: 5px; font-size: large; max-width: 70%">
+                    <h1 style="padding-bottom: 10px; font-family: Verdana; font-size: x-large; font-weight: 700">{{ user[0]['name'] }}</h1>
 
-        {% if user[0]['username'] or user[0]['location']%}
-        <p>
-            {% if user[0]['username'] %}{{ user[0]['username']}}{% endif %}
-            {% if user[0]['location'] %}
-                From <a href="http://maps.google.com/?q={{ user[0]['location']}}">{{ user[0]['location']}}</a>
-            {% endif %}
+                {% if user[0]['username'] or user[0]['location']%}
+                <p style="font-family: Verdana; padding-bottom: 10px">
+                    {% if user[0]['username'] %}{{ user[0]['username']}}{% endif %}
+                    {% if user[0]['location'] %}
+                        | <i>From</i>
+                        <a href="http://maps.google.com/?q={{ user[0]['location']}}">{{ user[0]['location']}}</a>
+                    {% endif %}
 
-        </p>
-        {% endif %}
+                </p>
+                {% endif %}
+
+                    <p style="font-family: Verdana; padding-bottom: 10px">
+                        Member Since {{ moment(user[0]['registration_date']).format('LL') }}
+                    </p>
+                    <p style="font-family: Verdana; padding-bottom: 10px">
+                        Last Active {{ moment(user[0]['modified_at']).fromNow() }}
+                    </p>
+
+                {% if user[0]['about_me'] %}
+                    <p  style="font-family: Verdana; padding-top: 20px; width: 100%">
+                        {{ user[0]['about_me'] }}</p>
+                    {% endif %}
 
 
-        <p>
-            Member Since {{ moment(user[0]['registration_date']).format('LL') }} |
-            Last Active {{ moment(user[0]['modified_at']).fromNow() }}
-        </p>
+            </div>
 
 
-        {% if user[0]['about_me'] %}<p>{{ user[0]['about_me'] }}</p>{% endif %}
+
+
+
 
     </div>
     </div>
