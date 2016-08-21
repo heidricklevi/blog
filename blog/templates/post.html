@@ -116,7 +116,7 @@
 
     <header id="main-nav">
         <nav class="nav nav-primary">
-            <ul style="list-style: none">
+            <ul style="list-style: none; -webkit-padding-start: 0">
                 <li class="nav-tab nav-tab-primary">
                     <span class="tab-content">{{ user.username }}</span>
                 </li>
@@ -134,7 +134,7 @@
                 filter: blur(10px);
             }
         </style>
-        <p style="font-family: Verdana">Please <a href="{{ url_for("register") }}"> Create Account</a> and/or <a href="{{ url_for('login_page') }}">Sign in </a>to post a comment.</p>
+        <p style="font-family: Verdana">Please <i>Create an Account</i> and/or <i>Sign in</i> to post a comment.</p>
     {% endif %}
         <form id="comment-form" class="form-horizontal" action="{{ url_for('post_comment', id=posts[0]['posts_id']) }}" method="post">
             <div class="comments">

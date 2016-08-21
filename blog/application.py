@@ -5,11 +5,9 @@ import smtplib
 from flask import Flask, session, render_template, request, flash, redirect, url_for, abort
 from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
 from flask.ext.paginate import Pagination
-from flask.ext.markdown import Markdown
 from flask.ext.moment import Moment
 from dbhelper import DBHelper
 from user import User, AnonymousUser
-# from markdown import markdown
 
 from forms import EditProfileForm, User_EditForm, PostForm, CommentForm
 from flask_mail import Mail
@@ -23,7 +21,7 @@ login_manager = LoginManager(application)
 DB = DBHelper()
 moment = Moment(application)
 mail = Mail(application)
-markdown = Markdown(application, safe_mode=False, output_format='html4')
+
 
 ROLE_USER = 1
 ROLE_MODERATOR = 2
