@@ -1,6 +1,6 @@
 import datetime
 import hashlib
-from flask.ext.login import AnonymousUserMixin
+from flask_login import AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request
 from dbhelper import DBHelper

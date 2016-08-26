@@ -127,3 +127,18 @@ div.flask-pagedown-preview h3 {
     font-weight: 700;
     font-size: large
 }
+
+#child-about {
+    margin-top: 5%;
+    margin-left: 5%;
+    /*margin-bottom: 85%;*/
+}
+
+#header-about h1 {
+    text-align: -webkit-center;
+    text-align: center;
+    margin-top: 5%;
+    font-weight: 700;
+    font-style: oblique;
+    color: darkgray;
+}

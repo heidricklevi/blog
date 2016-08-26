@@ -140,6 +140,7 @@ header[role=banner]::after {
     -o-transform: translateY(0);
     transform: translateY(0);
     line-height: 80px;
+    padding-top: 10px;
   }
   .main-nav ul.is-visible {
     list-style-type: none;

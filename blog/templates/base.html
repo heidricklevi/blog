@@ -160,14 +160,17 @@
 	</div> <!-- cd-user-modal -->
 
         <nav id="blog-nav" class="blog-nav">
-          <ul style="list-style-type: none">
-            <li><a class="nav-items" href="/">Home</a></li>
-{#            <li><a class="blog-nav-item" href="#">About</a></li>#}
+          <ul style="list-style-type: none; ">
+            <li style="padding: .6em 1em; "><a class="nav-items" href="/">Home</a></li>
+            <li style="padding: .6em 1em; "><a class="nav-items" href="{{ url_for('about') }}">About</a></li>
 {#            <li><a class="blog-nav-item" href="#">Contact</a></li>#}
           </ul>
         </nav>
       </div>
     </div>
+
+    {% block about %}
+    {% endblock %}
 
     <div class="container">
     {% block content %}

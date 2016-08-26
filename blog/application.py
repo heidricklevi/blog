@@ -3,9 +3,9 @@ import bcrypt
 import config
 import smtplib
 from flask import Flask, session, render_template, request, flash, redirect, url_for, abort
-from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
-from flask.ext.paginate import Pagination
-from flask.ext.moment import Moment
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_paginate import Pagination
+from flask_moment import Moment
 from dbhelper import DBHelper
 from user import User, AnonymousUser
 
@@ -70,6 +70,12 @@ def home(page):
                           format_total=True, css_framework='bootstrap3')
 
     return render_template("index.html", form=PostForm(), posts=posts, paginate=paginate, comments=comments)
+
+@application.route('/about')
+def about():
+    user = DB.get_user_by_name("ljheidrick")
+
+    return render_template('about.html', user=user)
 
 
 @application.route('/post/<int:id>')
